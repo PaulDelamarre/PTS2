@@ -35,7 +35,7 @@ public class FinalPTS2 extends Application {
         root.getChildren().add(btn);
         
         Scene scene = new Scene(root, 300, 250);
-        
+        /*test de depot distant nathan github*/
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
