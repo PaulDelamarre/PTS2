@@ -5,7 +5,6 @@
  */
 package tronv2;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Application;
@@ -28,8 +27,7 @@ import javafx.stage.Stage;
 public class TronV2 extends Application 
 {
     Timer itsTimer;
-    private ArrayList blueTab = new ArrayList<Wall>();
-    private ArrayList redTab = new ArrayList<Wall>();
+    
     @Override
     public void start(Stage primaryStage) 
     {
@@ -60,10 +58,10 @@ public class TronV2 extends Application
                 
                 Line linePlayer1 = new Line(50, 250, 50, 250); 
                 linePlayer1.setStroke(Color.BLUE);
-                linePlayer1.setStrokeWidth(10);
+                linePlayer1.setStrokeWidth(20);
                 Line linePlayer2 = new Line(950, 250, 950, 250); 
                 linePlayer2.setStroke(Color.RED);
-                linePlayer2.setStrokeWidth(10);
+                linePlayer2.setStrokeWidth(20);
                 
                 Player player1 = new Player(1, 50, 250, true, false, linePlayer1);
                 Player player2 = new Player(2, 950, 250, false, true, linePlayer2);
@@ -89,7 +87,7 @@ public class TronV2 extends Application
                             
                             Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
                             blueLine.setStroke(Color.BLUE);
-                            blueLine.setStrokeWidth(10);
+                            blueLine.setStrokeWidth(20);
                             Wall blueWall = new Wall (blueLine);
                             root.getChildren().add(blueLine);
                             blueWall.setIsWall(true);
@@ -98,28 +96,37 @@ public class TronV2 extends Application
                             
                             Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
                             redLine.setStroke(Color.RED);
-                            redLine.setStrokeWidth(10);
+                            redLine.setStrokeWidth(20);
                             Wall redWall = new Wall (redLine);
                             root.getChildren().add(redLine);
                             redWall.setIsWall(true);
-                            redWall.setPosX((int) player2.getPosX());
-                            redWall.setPosY((int) player2.getPosY());
-
+                            redWall.setPosX((int) player1.getPosX());
+                            redWall.setPosY((int) player1.getPosY());
                             
-
+                            collision.collision(player1, blueWall);
+                            collision.collision(player2, blueWall);
                             /*
                             System.out.println("Pos X " + yo.getPosX());
                             System.out.println("Pos Y " + yo.getPosY());
                             */
 
-                            if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab) ) // || collision.collision(player1, yo)
+                            if(collision.collisions(player1, player2, blueWall)) // || collision.collision(player1, yo)
                             {
                                 itsTimer.cancel();
+                                //primaryStage.close();
+                                /*
+                                StackPane root = new StackPane();
+        
+                                Scene scene = new Scene(root, 1000, 500);
+
+                                primaryStage.setTitle("Tron");
+                                primaryStage.setScene(scene);
+                                Button btn = new Button();
+                                root.getChildren().add(btn);
+                                btn.setText("You loose because you are a looser");
+                                primaryStage.show();
+                                */
                             }
-                            blueTab.add(blueWall);
-                            redTab.add(redWall);
-                            System.out.println(redTab.size());
-                            System.out.println(blueTab.size());
                             
                         });
                     }
