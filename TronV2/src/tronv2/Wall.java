@@ -46,10 +46,16 @@ public class Wall
     public void setIsWall(boolean isWall) {
         this.isWall = isWall;
     }
+
+
+    public Line getWallLine() {
+        return wallLine;
+    }
     
+    
+   
     public void draw()
     {
-        this.wallLine.setStartX(posX);
         this.wallLine.setStartX(posX);
         this.wallLine.setStartY(posY);
         this.wallLine.setEndX(posX-1000);
