@@ -5,6 +5,8 @@
  */
 package tronv2;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -31,17 +35,37 @@ public class TronV2 extends Application
     private ArrayList blueTab = new ArrayList<Wall>();
     private ArrayList redTab = new ArrayList<Wall>();
     @Override
-    public void start(Stage primaryStage) 
+    public void start(Stage primaryStage) throws FileNotFoundException
     {
         StackPane root = new StackPane();
         
-        Scene scene = new Scene(root, 1000, 500);
+        Scene scene2 = new Scene(root, 1000, 500);
         
         primaryStage.setTitle("Tron");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(scene2);
         Button btn = new Button();
+        
+        btn.setMaxHeight(80);
+        btn.setMaxWidth(290);
+        btn.setTranslateY(180);
+        btn.setTranslateX(-10);
+        btn.setStyle("-fx-background-color: #ff0000; ");
+        btn.setStyle("-fx-background-color: transparent;"); 
+        
+        FileInputStream Menu = new FileInputStream("src/tronv2/Menu_princip_750.jpg");
+        Image imageMenu = new Image(Menu, 750, 750, false, false);
+        ImageView MenuPrincip = new ImageView(imageMenu);
+        root.getChildren().add(MenuPrincip);
         root.getChildren().add(btn);
-        btn.setText("Démarrer la partie");
+                        
+        FileInputStream inputB = new FileInputStream("src/tronv2/moto.png");
+        Image imageMotoB = new Image(inputB, 32, 32, false, false);
+        ImageView motoB = new ImageView(imageMotoB);
+                
+        FileInputStream inputR = new FileInputStream("src/tronv2/moto2.png");
+        Image imageMotoR = new Image(inputR, 32, 32, false, false);
+        ImageView motoR = new ImageView(imageMotoR);
+        
         primaryStage.show();
             
         btn.setOnAction(new EventHandler<ActionEvent>() 
@@ -73,6 +97,23 @@ public class TronV2 extends Application
                 root.getChildren().add(linePlayer1);
                 root.getChildren().add(linePlayer2);
                 
+                root.getChildren().add(motoB);
+                root.getChildren().add(motoR);
+                
+                Button btn2 = new Button();
+                    btn2.setText("Quit");
+                    btn2.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("Menu");
+                            primaryStage.setScene(scene2);
+                            primaryStage.show();
+                            itsTimer.cancel();
+                    }
+                });
+                    
+                    
+                root.getChildren().add(btn2);
                 
                 TimerTask gameLoop = new TimerTask() 
                 {
@@ -115,6 +156,8 @@ public class TronV2 extends Application
                             if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab) ) // || collision.collision(player1, yo)
                             {
                                 itsTimer.cancel();
+                                primaryStage.setScene(scene2);
+                                primaryStage.show();
                             }
                             blueTab.add(blueWall);
                             redTab.add(redWall);
