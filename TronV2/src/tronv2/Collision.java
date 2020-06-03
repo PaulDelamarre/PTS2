@@ -51,30 +51,46 @@ public class Collision {
     * Mur is true / problème de vérification de tous les murs
     * Pane ... mais utilition biaisée
     */
-    public boolean blueCollision(ArrayList<Wall> redtab, Wall wall1)
+    public boolean blueCollision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall1)
     {
         boolean collision = false;
-        for(int TheI = 0;TheI < redtab.size() && collision == false;TheI++)
+        for(int TheI = 0;TheI < redtab.size() -1 && collision == false;TheI++)
         {
-            if(wall1.getPosX() == redtab.get(TheI).getPosX() && wall1.getPosY() == redtab.get(TheI).getPosY()){
+            if(wall1.getWallLine().intersects(redtab.get(TheI).getWallLine().getBoundsInLocal()) ){
                 collision = true;
-                System.out.println("blue");
             }
+            
     
+        } 
+        for(int TheI = bluetab.size()-1;TheI > 0 && collision == false;TheI--)
+        {
+            if(TheI > 60){
+            if(wall1.getWallLine().intersects(bluetab.get(TheI-55).getWallLine().getBoundsInLocal()) ){
+                collision = true;
+            }
+            }
         } 
         return collision;
     }
     
-    public boolean redCollision(ArrayList<Wall> bluetab, Wall wall2)
+    public boolean redCollision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall2)
     {
         boolean collision = false;
-        for(int TheI = 0;TheI < bluetab.size() && collision == false;TheI++)
+        for(int TheI = 0;TheI < bluetab.size()-1 && collision == false;TheI++)
         {
-            if(wall2.getPosX() == bluetab.get(TheI).getPosX() && wall2.getPosY() == bluetab.get(TheI).getPosY()){
+            if(wall2.getWallLine().intersects(bluetab.get(TheI).getWallLine().getBoundsInLocal())){
                 collision = true;
-                System.out.println("red");
             }
         } 
+        for(int TheI = bluetab.size()-1;TheI > 0 && collision == false;TheI--)
+        {
+            if(TheI > 60){
+            if(wall2.getWallLine().intersects(redtab.get(TheI-55).getWallLine().getBoundsInLocal()) ){
+                collision = true;
+            }
+            }
+        } 
+        
         return collision;
     }
     
@@ -99,16 +115,16 @@ public class Collision {
             System.out.println("Joueur Bleu à gagné");
         }
         
-        else if(blueCollision(redtab, blueWall))
+        else if(blueCollision(redtab,bluetab, blueWall))
         {
             ifOneIsTrue = true;
-            System.out.println("bluecollision");
+            System.out.println("joueur rouge à gagné");
         }
       
-        else if(redCollision(bluetab, redWall))
+        else if(redCollision(redtab,bluetab, redWall))
         {
             ifOneIsTrue = true;
-            System.out.println("redcollision");
+            System.out.println("joueur bleu à gagné");
         }
         
 
