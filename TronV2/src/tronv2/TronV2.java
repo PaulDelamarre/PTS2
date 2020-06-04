@@ -34,29 +34,30 @@ public class TronV2 extends Application
     Timer itsTimer;
     private ArrayList blueTab = new ArrayList<Wall>();
     private ArrayList redTab = new ArrayList<Wall>();
+    
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException
     {
         StackPane root = new StackPane();
         root.setStyle("-fx-background-color: Gainsboro;-fx-border-color: blue;");
-        Scene scene2 = new Scene(root, 1000, 500);
+        Scene menu = new Scene(root, 750, 750);
         
         primaryStage.setTitle("Tron");
-        primaryStage.setScene(scene2);
-        Button btn = new Button();
+        primaryStage.setScene(menu);
+        Button btnPlay = new Button();
         
-        btn.setMaxHeight(80);
-        btn.setMaxWidth(290);
-        btn.setTranslateY(180);
-        btn.setTranslateX(-10);
-        btn.setStyle("-fx-background-color: #ff0000; ");
-        btn.setStyle("-fx-background-color: transparent;"); 
+        btnPlay.setMaxHeight(80);
+        btnPlay.setMaxWidth(290);
+        btnPlay.setTranslateY(180);
+        btnPlay.setTranslateX(-10);
+        btnPlay.setStyle("-fx-background-color: #ff0000; ");
+        btnPlay.setStyle("-fx-background-color: transparent;"); 
         
         FileInputStream Menu = new FileInputStream("src/tronv2/Menu_princip_750.jpg");
         Image imageMenu = new Image(Menu, 750, 750, false, false);
         ImageView MenuPrincip = new ImageView(imageMenu);
         root.getChildren().add(MenuPrincip);
-        root.getChildren().add(btn);
+        root.getChildren().add(btnPlay);
                         
         FileInputStream inputB = new FileInputStream("src/tronv2/moto.png");
         Image imageMotoB = new Image(inputB, 32, 32, false, false);
@@ -66,55 +67,58 @@ public class TronV2 extends Application
         Image imageMotoR = new Image(inputR, 32, 32, false, false);
         ImageView motoR = new ImageView(imageMotoR);
         
+        Player player1 = new Player(1, 50, 375);
+        Player player2 = new Player(2, 650, 375);
+        Collision collision = new Collision();
+        
         primaryStage.show();
             
-        btn.setOnAction(new EventHandler<ActionEvent>() 
+        btnPlay.setOnAction(new EventHandler<ActionEvent>() 
         {
             @Override
             public void handle(ActionEvent event) 
             {
                 Group root = new Group();
-            
-                Scene scene = new Scene(root, 1000, 500);
+                Scene scene = new Scene(root, 750, 750);
                 primaryStage.setScene(scene);
-
-
                 primaryStage.show();
                 
+                player1.start();
+                player2.start();
                 
-                Line linePlayer1 = new Line(50, 250, 50, 250); 
-                linePlayer1.setStroke(Color.BLUE);
-                linePlayer1.setStrokeWidth(5);
-
-                Line linePlayer2 = new Line(950, 250, 950, 250); 
-                linePlayer2.setStroke(Color.RED);
-                linePlayer2.setStrokeWidth(5);
- 
-                Player player1 = new Player(1, 50, 250, true, false, linePlayer1);
-                Player player2 = new Player(2, 950, 250, false, true, linePlayer2);
-                
-                Collision collision = new Collision();
-                
-                root.getChildren().add(linePlayer1);
-                root.getChildren().add(linePlayer2);
+                player1.moveRight();
+                player2.moveLeft();
                 
                 root.getChildren().add(motoB);
                 root.getChildren().add(motoR);
+                motoB.rotateProperty().setValue(0);
+                motoR.rotateProperty().setValue(180);
                 
-                Button btn2 = new Button();
-                    btn2.setText("Quit");
-                    btn2.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            System.out.println("Menu");
-                            primaryStage.setScene(scene2);
-                            primaryStage.show();
-                            itsTimer.cancel();
-                    }
-                });
+                Button btnMenu = new Button();
+                btnMenu.setText("Quit");
+                btnMenu.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        //System.out.println("Menu");
+                        primaryStage.setScene(menu);
+                        primaryStage.show();
+                        itsTimer.cancel();
+                        redTab.clear();
+                        blueTab.clear();
+                                
+                        motoB.translateXProperty().set(0);
+                        motoB.translateYProperty().set(0);
+                        motoR.translateXProperty().set(0);
+                        motoR.translateYProperty().set(0);
+                        motoB.rotateProperty().setValue(0);
+                        motoR.rotateProperty().setValue(180);
+                }
+            });
                     
+                            
                     
-                root.getChildren().add(btn2);
+                root.getChildren().add(btnMenu);
                 
                 TimerTask gameLoop = new TimerTask() 
                 {
@@ -123,8 +127,6 @@ public class TronV2 extends Application
                     {
                         Platform.runLater(() ->
                         {
-                            player1.moveRight(player1);
-                            player2.moveLeft(player2);
                             player1.draw();
                             player2.draw();
                             
@@ -135,7 +137,6 @@ public class TronV2 extends Application
 
                             Wall blueWall = new Wall (blueLine);
                             root.getChildren().add(blueLine);
-                            blueWall.setIsWall(true);
                             blueWall.setPosX((int) player1.getPosX());
                             blueWall.setPosY((int) player1.getPosY());
                             
@@ -145,33 +146,39 @@ public class TronV2 extends Application
 
                             Wall redWall = new Wall (redLine);
                             root.getChildren().add(redLine);
-                            redWall.setIsWall(true);
                             redWall.setPosX((int) player2.getPosX());
                             redWall.setPosY((int) player2.getPosY());
                             
-                            motoB.setX(player1.getPosX()-20);
-                            motoB.setY(player1.getPosY()-15);
-                            motoR.setX(player2.getPosX()-10);
-                            motoR.setY(player2.getPosY()-15);
                             
+                            motoB.setX(player1.getPosX()-24);
+                            motoB.setY(player1.getPosY()-15);
+                            motoR.setX(player2.getPosX()-9);
+                            motoR.setY(player2.getPosY()-18);
 
-                            /*
-                            System.out.println("Pos X " + yo.getPosX());
-                            System.out.println("Pos Y " + yo.getPosY());
-                            */
-
-                            if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab) ) // || collision.collision(player1, yo)
-                            {
-                                itsTimer.cancel();
-                                primaryStage.setScene(scene2);
-                                primaryStage.show();
-                                blueTab.clear();
-                                redTab.clear();
-                            }
+                            
                             blueTab.add(blueWall);
                             redTab.add(redWall);
+                            /*
                             System.out.println(redTab.size());
                             System.out.println(blueTab.size());
+                            */
+                            if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab))
+                            {
+                                itsTimer.cancel();
+                                /*
+                                primaryStage.setScene(menu);
+                                primaryStage.show();
+                                */
+                                blueTab.clear();
+                                redTab.clear();
+                                
+                                motoB.translateXProperty().set(0);
+                                motoB.translateYProperty().set(0);
+                                motoR.translateXProperty().set(0);
+                                motoR.translateYProperty().set(0);
+                                motoB.rotateProperty().setValue(0);
+                                motoR.rotateProperty().setValue(180);
+                            }
                             
                         });
                     }
@@ -183,48 +190,97 @@ public class TronV2 extends Application
                 scene.setOnKeyPressed(key ->
                 {
                     KeyCode keyCode = key.getCode();
-                    if(keyCode.equals(KeyCode.RIGHT))
-                    {
-                        player1.setMoveRight(true);
-                        player1.moveRight(player1);
-                    }
-                    if(keyCode.equals(KeyCode.DOWN))
-                    {
-                        player1.setMoveDown(true);
-                        player1.moveDown(player1);
-                    }
-                    if(keyCode.equals(KeyCode.LEFT))
-                    {
-                        player1.setMoveLeft(true);
-                        player1.moveLeft(player1);
-                    }
-                    if(keyCode.equals(KeyCode.UP))
-                    {
-                        player1.setMoveUp(true);
-                        player1.moveUp(player1);
-                    }
-                    
-                    
-                    
                     if(keyCode.equals(KeyCode.D))
                     {
-                        player2.setMoveRight(true);
-                        player2.moveRight(player2);
+                        player1.moveRight();
+                        
+                        if(!player1.getMoveLeft())
+                        {
+                            motoB.rotateProperty().setValue(0);
+                            motoB.translateXProperty().set(0);
+                            motoB.translateYProperty().set(0);
+                        }
+                        
                     }
                     if(keyCode.equals(KeyCode.S))
                     {
-                        player2.setMoveDown(true);
-                        player2.moveDown(player2);
+                        player1.moveDown();
+                        
+                        if(!player1.getMoveUp())
+                        {
+                            motoB.rotateProperty().setValue(90);
+                            motoB.translateXProperty().set(7);
+                            motoB.translateYProperty().set(-7);
+                        }
                     }
                     if(keyCode.equals(KeyCode.Q))
                     {
-                        player2.setMoveLeft(true);
-                        player2.moveLeft(player2);
+                        player1.moveLeft();
+                        
+                        if(!player1.getMoveRight())
+                        {
+                            motoB.rotateProperty().setValue(180);
+                            motoB.translateXProperty().set(17);
+                            motoB.translateYProperty().set(-4);
+                        }
                     }
                     if(keyCode.equals(KeyCode.Z))
                     {
-                        player2.setMoveUp(true);
-                        player2.moveUp(player2);
+                        player1.moveUp();
+                        
+                        if(!player1.getMoveDown())
+                        {
+                            motoB.rotateProperty().setValue(-90);
+                            motoB.translateXProperty().set(10);
+                            motoB.translateYProperty().set(6);
+                        }
+                    }
+                    
+                    
+                    
+                    if(keyCode.equals(KeyCode.RIGHT))
+                    {
+                        player2.moveRight();
+                        
+                        if(!player2.getMoveLeft())
+                        {
+                            motoR.rotateProperty().setValue(0);
+                            motoR.translateXProperty().set(-15);
+                            motoR.translateYProperty().set(3);
+                        }
+                    }
+                    if(keyCode.equals(KeyCode.DOWN))
+                    {
+                        player2.moveDown();
+                        
+                        if(!player2.getMoveUp())
+                        {
+                            motoR.rotateProperty().setValue(90);
+                            motoR.translateXProperty().set(-8);
+                            motoR.translateYProperty().set(-7);
+                        }
+                    }
+                    if(keyCode.equals(KeyCode.LEFT))
+                    {
+                        player2.moveLeft();
+                        
+                        if(!player2.getMoveRight())
+                        {
+                            motoR.rotateProperty().setValue(180);
+                            motoR.translateXProperty().set(0);
+                            motoR.translateYProperty().set(0);
+                        }
+                    }
+                    if(keyCode.equals(KeyCode.UP))
+                    {
+                        player2.moveUp();
+                        
+                        if(!player2.getMoveDown())
+                        {
+                            motoR.rotateProperty().setValue(-90);
+                            motoR.translateXProperty().set(-5);
+                            motoR.translateYProperty().set(8);
+                        }
                     }
                 });
             }

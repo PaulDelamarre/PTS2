@@ -21,19 +21,19 @@ public class Player{
     private boolean moveLeft;
     private boolean moveUp;
     private boolean moveDown;
-    private Line playerLine;
 
-    public Player(int idPlayer, float posX, float posY, boolean moveRight, boolean moveLeft, Line line) {
+    public Player(int idPlayer, float posX, float posY) {
         this.idPlayer = idPlayer;
         this.speedX = 0;
         this.speedY = 0;
         this.posX = posX;
         this.posY = posY;
-        this.moveRight = moveRight;
-        this.moveLeft = moveLeft;
-        this.playerLine = line;
     }
 
+    public int getIdPlayer() {
+        return idPlayer;
+    }
+    
     public boolean getMoveRight() {
         return moveRight;
     }
@@ -48,26 +48,6 @@ public class Player{
 
     public boolean getMoveDown() {
         return moveDown;
-    }
-
-    public void setMoveRight(boolean moveRight) {
-        this.moveRight = moveRight;
-    }
-
-    public void setMoveLeft(boolean moveLeft) {
-        this.moveLeft = moveLeft;
-    }
-
-    public void setMoveUp(boolean moveUp) {
-        this.moveUp = moveUp;
-    }
-
-    public void setMoveDown(boolean moveDown) {
-        this.moveDown = moveDown;
-    }
-
-    public int getIdPlayer() {
-        return idPlayer;
     }
     
     public float getPosX() {
@@ -87,24 +67,40 @@ public class Player{
     public void draw()
     {
         move();
-        
-        this.playerLine.setStartX(posX);
-        this.playerLine.setStartY(posY);
-        this.playerLine.setEndX(posX);
-        this.playerLine.setEndY(posY);
+    }
+    
+    public void start()
+    {
+        if(idPlayer == 1)
+        {
+            posX = 50;
+            moveRight = true;
+            moveLeft = false;
+        }
+        else
+        {
+            posX = 700;
+            moveLeft = true;
+            moveRight = false;
+        }
+        posY = 375;
+        moveUp = false;
+        moveDown = false;
         
     }
     
-    public void moveRight(Player player)
+    public void moveRight()
     {
-        if(!player.getMoveLeft())
+        if(!moveLeft)
         {
-            if(player.getMoveRight())
+            moveRight = true;
+            
+            if(moveRight)
             {
                 speedX = (float) 0.5;
                 speedY = (float) 0;
-                player.setMoveDown(false);
-                player.setMoveUp(false);
+		moveDown = false;
+		moveUp = false;
             }
             else
             {
@@ -114,16 +110,18 @@ public class Player{
         
     }
     
-    public void moveLeft(Player player)
+    public void moveLeft()
     {
-        if(!player.getMoveRight())
+        if(!moveRight)
         {
-            if(player.getMoveLeft())
+            moveLeft = true;
+            
+            if(moveLeft)
             {
                 speedX = (float) -0.5;
                 speedY = (float) 0;
-                player.setMoveDown(false);
-                player.setMoveUp(false);
+		moveDown = false;
+		moveUp = false;
             }
             else
             {
@@ -132,16 +130,18 @@ public class Player{
         }
     }
     
-    public void moveUp(Player player)
+    public void moveUp()
     {
-        if(!player.getMoveDown())
+        if(!moveDown)
         {
-            if(player.getMoveUp())
+            moveUp = true;
+            
+            if(moveUp)
             {
                 speedY = (float) -0.5;
                 speedX = (float) 0;
-                player.setMoveRight(false);
-                player.setMoveLeft(false);
+		moveRight = false;
+		moveLeft = false;
             }
             else
             {
@@ -150,16 +150,18 @@ public class Player{
         }
     }
     
-    public void moveDown(Player player)
+    public void moveDown()
     {
-        if(!player.getMoveUp())
+        if(!moveUp)
         {
-            if(player.getMoveDown())
+            moveDown = true;
+            
+            if(moveDown)
             {
                 speedY = (float) 0.5;
                 speedX = (float) 0;
-                player.setMoveRight(false);
-                player.setMoveLeft(false);
+		moveRight = false;
+		moveLeft = false;
             }
             else
             {
