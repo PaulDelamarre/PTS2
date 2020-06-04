@@ -44,24 +44,19 @@ public class Collision {
     
     /*
     * Méthode headOnCollision   /!\ A gérer /!\
-    * Paramètres : 
+    * Paramètres : Les deux murs qui sont à l'avant des joueurs Wall
     * Méthode qui gère les collision entre les deux joueurs lorsqu'une égalité est ammenée à se produire.
     * Renvoie : Un boolean vrai si les deux joueurs se retrouvent face à face
     */
-    public boolean headOnCollision(ArrayList<Wall> bluetab, Wall wall2)
+    public boolean headOnCollision(Wall wall1, Wall wall2)
     {
         boolean headOnCollision = false;
         
-        for(int TheI = bluetab.size()-1;TheI > 0 && headOnCollision == false;TheI--)
+        if(wall2.getWallLine().intersects(wall1.getWallLine().getBoundsInLocal()) )
         {
-            if(TheI < 60)
-            {
-                if(wall2.getWallLine().intersects(bluetab.get(TheI).getWallLine().getBoundsInLocal()) )
-                {
-                    headOnCollision = true;
-                }
-            }
+            headOnCollision = true;
         }
+                
         return headOnCollision;
     }
     
@@ -134,7 +129,7 @@ public class Collision {
     public boolean collisions(Player player1, Player player2, Wall redWall,Wall blueWall,ArrayList<Wall> bluetab,ArrayList<Wall> redtab)
     {
         boolean ifOneIsTrue = false;
-        if(headOnCollision(bluetab, redWall))
+        if(headOnCollision(blueWall, redWall))
         {
             ifOneIsTrue = true;
             System.out.println("Egalité");
