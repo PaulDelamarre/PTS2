@@ -79,7 +79,7 @@ public class TronV2 extends Application
             public void handle(ActionEvent event) 
             {
                 Group root = new Group();
-                Scene scene = new Scene(root, 750, 750);
+                Scene scene = new Scene(root, 750, 750,Color.BLACK);
                 primaryStage.setScene(scene);
                 primaryStage.show();
                 
@@ -154,7 +154,7 @@ public class TronV2 extends Application
                             motoB.setY(player1.getPosY()-15);
                             motoR.setX(player2.getPosX()-9);
                             motoR.setY(player2.getPosY()-18);
-
+                            
                             
                             blueTab.add(blueWall);
                             redTab.add(redWall);
@@ -179,6 +179,8 @@ public class TronV2 extends Application
                                 motoB.rotateProperty().setValue(0);
                                 motoR.rotateProperty().setValue(180);
                             }
+                            motoR.toFront();
+                            motoB.toFront();
                             
                         });
                     }
