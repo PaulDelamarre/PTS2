@@ -7,9 +7,12 @@ package tronv2;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -34,7 +37,7 @@ public class TronV2 extends Application
     Timer itsTimer;
     private ArrayList blueTab = new ArrayList<Wall>();
     private ArrayList redTab = new ArrayList<Wall>();
-    
+    MusicPlayer musicGame;
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException
     {
@@ -72,7 +75,13 @@ public class TronV2 extends Application
         Collision collision = new Collision();
         
         primaryStage.show();
-            
+        
+        try {
+            musicGame = new MusicPlayer("src/tronv2/musics/daft-punk-the-game-has-changed-tron-legacy.wav");
+        } catch (IOException ex) {
+            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        musicGame.playMusic();
         btnPlay.setOnAction(new EventHandler<ActionEvent>() 
         {
             @Override
@@ -82,7 +91,16 @@ public class TronV2 extends Application
                 Scene scene = new Scene(root, 750, 750,Color.BLACK);
                 primaryStage.setScene(scene);
                 primaryStage.show();
-                
+                musicGame.stopMusic();
+                try 
+                {
+                    musicGame = new MusicPlayer("src/tronv2/musics/powerwalkin-by-future-joust-electro-music.wav");
+                } 
+                catch (IOException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                musicGame.playMusic();
                 player1.start();
                 player2.start();
                 
@@ -113,6 +131,13 @@ public class TronV2 extends Application
                         motoR.translateYProperty().set(0);
                         motoB.rotateProperty().setValue(0);
                         motoR.rotateProperty().setValue(180);
+                        musicGame.stopMusic();
+                        try {
+                            musicGame = new MusicPlayer("src/tronv2/musics/daft-punk-the-game-has-changed-tron-legacy.wav");
+                        } catch (IOException ex) {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        musicGame.playMusic();
                 }
             });
                     
@@ -165,6 +190,7 @@ public class TronV2 extends Application
                             if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab))
                             {
                                 itsTimer.cancel();
+                                /*musicGame.stopMusic();*/
                                 /*
                                 primaryStage.setScene(menu);
                                 primaryStage.show();
@@ -301,5 +327,6 @@ public class TronV2 extends Application
     public void stop()
     {
         itsTimer.cancel();
+        musicGame.stopMusic();
     }
 }
