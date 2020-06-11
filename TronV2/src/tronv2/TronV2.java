@@ -106,6 +106,7 @@ public class TronV2 extends Application
                 
                 player1.moveRight();
                 player2.moveLeft();
+
                 
                 root.getChildren().add(motoB);
                 root.getChildren().add(motoR);
@@ -114,6 +115,9 @@ public class TronV2 extends Application
                 
                 Button btnMenu = new Button();
                 btnMenu.setText("Quit");
+                btnMenu.setTranslateY(300);
+                btnMenu.setTranslateX(350);
+                btnMenu.toFront();
                 btnMenu.setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
@@ -143,7 +147,7 @@ public class TronV2 extends Application
                     
                             
                     
-                root.getChildren().add(btnMenu);
+               
                 
                 TimerTask gameLoop = new TimerTask() 
                 {
@@ -197,13 +201,16 @@ public class TronV2 extends Application
                                 */
                                 blueTab.clear();
                                 redTab.clear();
-                                
+                                motoR.toBack();
+                                motoB.toBack();
+                                btnMenu.toFront();
                                 motoB.translateXProperty().set(0);
                                 motoB.translateYProperty().set(0);
                                 motoR.translateXProperty().set(0);
                                 motoR.translateYProperty().set(0);
                                 motoB.rotateProperty().setValue(0);
                                 motoR.rotateProperty().setValue(180);
+                                root.getChildren().add(btnMenu);
                             }
                             motoR.toFront();
                             motoB.toFront();
