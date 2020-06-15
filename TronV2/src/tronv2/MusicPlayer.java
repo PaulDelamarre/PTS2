@@ -27,28 +27,34 @@ public class MusicPlayer
        theMusic = new FileInputStream(new File(itsFilePath));
        audio = new AudioStream(theMusic); 
     }
-    public void playMusic()
+    public Boolean playMusic()
     {
-        
+        Boolean theTrue =false ;
         try
         {   
             AudioPlayer.player.start(audio);
+            theTrue = true;
+            
         }
         catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
         }
+        return theTrue;
     }
-    public void stopMusic()
+    public Boolean stopMusic()
     {
+        Boolean theTrue =true ;
         try
         {
             AudioPlayer.player.stop(audio);
+            theTrue= false;
         }
         catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
         }
+        return theTrue;
     }
     
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication12.FXMLDocumentController">
+    <children>
+      <Button layoutX="308.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleButtonActionDemarrePas" text="Pas à pas" />
+      <Button layoutX="226.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleButtonActionDemarre" text="Démarrer" />
+      <Label layoutX="47.0" layoutY="358.0" text="Nombre de jours malade" />
+      <Button layoutX="154.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleButtonActionArrete" text="Arrêter" />
+      <Label layoutX="19.0" layoutY="331.0" text="Nombre de jours d'incubation" />
+      <Slider layoutX="217.0" layoutY="332.0" />
+      <Label fx:id="IDayWithSymptoms" layoutX="379.0" layoutY="358.0" />
+      <Label fx:id="ITrnasmissionRate" layoutX="379.0" layoutY="306.0" />
+      <Label fx:id="IDaysIncubation" layoutX="379.0" layoutY="331.0" />
+      <Label layoutX="185.0" layoutY="43.0" text="Propagation d'une infection" />
+      <Label layoutX="57.0" layoutY="306.0" text="Taux de transmission" />
+    </children>
+</AnchorPane>
