@@ -16,23 +16,31 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.CYAN;
+import static javafx.scene.paint.Color.GREEN;
+import static javafx.scene.paint.Color.PINK;
+import static javafx.scene.paint.Color.PURPLE;
+import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.YELLOW;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
@@ -46,6 +54,8 @@ public class TronV2 extends Application
     private ArrayList blueTab = new ArrayList<Wall>();
     private ArrayList redTab = new ArrayList<Wall>();
     MusicPlayer musicGame;
+    private static Color colorP1 = BLUE;
+    private static Color colorP2 = RED;
     Boolean musicOn ;
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException
@@ -56,15 +66,15 @@ public class TronV2 extends Application
         
         primaryStage.setTitle("Tron");
         primaryStage.setScene(menu);
-        Button btnPlay = new Button();
+        Button btnParam = new Button();
         Button btnOption = new Button();
         
-        btnPlay.setMaxHeight(80);
-        btnPlay.setMaxWidth(290);
-        btnPlay.setTranslateY(180);
-        btnPlay.setTranslateX(-10);
-        btnPlay.setStyle("-fx-background-color: #ff0000; ");
-        btnPlay.setStyle("-fx-background-color: transparent;"); 
+        btnParam.setMaxHeight(80);
+        btnParam.setMaxWidth(290);
+        btnParam.setTranslateY(180);
+        btnParam.setTranslateX(-10);
+        btnParam.setStyle("-fx-background-color: #ff0000; ");
+        btnParam.setStyle("-fx-background-color: transparent;"); 
         
         btnOption.setMaxHeight(80);
         btnOption.setMaxWidth(290);
@@ -77,9 +87,9 @@ public class TronV2 extends Application
         Image imageMenu = new Image(Menu, 750, 750, false, false);
         ImageView menuPrincip = new ImageView(imageMenu);
         root.getChildren().add(menuPrincip);
-        root.getChildren().add(btnPlay);
+        root.getChildren().add(btnParam);
         root.getChildren().add(btnOption);
-                        
+        
         FileInputStream inputB = new FileInputStream("src/tronv2/img/moto.png");
         Image imageMotoB = new Image(inputB, 32, 32, false, false);
         ImageView motoB = new ImageView(imageMotoB);
@@ -128,14 +138,13 @@ public class TronV2 extends Application
                 btnQuitOption.setMaxSize(70, 40);
                 btnQuitOption.setMinSize(65, 35);
                 btnQuitOption.setStyle("-fx-background-color: #000000");
-                FileInputStream opt;
-                Image imgOpt;
-                BackgroundImage backOpt;
+                
                 try 
                 {
+                    FileInputStream opt;
+                    Image imgOpt;
                     opt = new FileInputStream("src/tronv2/img/quit_blue.png");
                     imgOpt = new Image(opt);
-                    backOpt = new BackgroundImage(imgOpt, null, null, null, null);
                     btnQuitOption.setGraphic(new ImageView(imgOpt));
                 } 
                 catch (FileNotFoundException ex) 
@@ -148,14 +157,14 @@ public class TronV2 extends Application
                     @Override
                     public void handle(MouseEvent event) 
                     {
-                        FileInputStream opt;
-                        Image imgOpt;
-                        BackgroundImage backOpt;
+                        
                         try 
                         {
+                            FileInputStream opt;
+                            Image imgOpt;
                             opt = new FileInputStream("src/tronv2/img/quit_red.png");
                             imgOpt = new Image(opt);
-                            backOpt = new BackgroundImage(imgOpt, null, null, null, null);
+                            
                             btnQuitOption.setGraphic(new ImageView(imgOpt));
                         } 
                         catch (FileNotFoundException ex) 
@@ -169,31 +178,20 @@ public class TronV2 extends Application
                     @Override
                     public void handle(ActionEvent event) 
                     {
-                        //System.out.println("Menu");
                         primaryStage.setScene(menu);
                         primaryStage.show();
-                        itsTimer.cancel();
-                        redTab.clear();
-                        blueTab.clear();
-                                
-                        motoB.translateXProperty().set(0);
-                        motoB.translateYProperty().set(0);
-                        motoR.translateXProperty().set(0);
-                        motoR.translateYProperty().set(0);
-                        motoB.rotateProperty().setValue(0);
-                        motoR.rotateProperty().setValue(180);
                     }
                 });
-                FileInputStream vol;
-                Image imgVol;
-                BackgroundImage backImg;
+                
                 if(musicOn)
                 {
+                    
                     try 
                     {
+                        FileInputStream vol;
+                        Image imgVol;
                         vol = new FileInputStream("src/tronv2/img/TEY.png");
                         imgVol = new Image(vol);
-                        backImg = new BackgroundImage(imgVol, null, null, null, null);
                         btnVolume.setGraphic(new ImageView(imgVol));  
                     } 
                     catch (FileNotFoundException ex) 
@@ -205,9 +203,10 @@ public class TronV2 extends Application
                 {
                     try 
                     {
+                        FileInputStream vol;
+                        Image imgVol;
                         vol = new FileInputStream("src/tronv2/img/NEY.png");
                         imgVol = new Image(vol);
-                        backImg = new BackgroundImage(imgVol, null, null, null, null);
                         btnVolume.setGraphic(new ImageView(imgVol));
                     }
                     catch (FileNotFoundException ex) 
@@ -235,16 +234,15 @@ public class TronV2 extends Application
                     @Override
                     public void handle(MouseEvent event) 
                     {
-                        FileInputStream vol;
-                        Image imgVol;
-                        BackgroundImage backImg;
+                        
                         if(musicOn)
                         {
                             try 
                             {
+                                FileInputStream vol;
+                                Image imgVol;
                                 vol = new FileInputStream("src/tronv2/img/TEY_A.png");
                                 imgVol = new Image(vol);
-                                backImg = new BackgroundImage(imgVol, null, null, null, null);
                                 btnVolume.setGraphic(new ImageView(imgVol));  
                             } 
                             catch (FileNotFoundException ex) 
@@ -257,9 +255,10 @@ public class TronV2 extends Application
                         {
                             try 
                             {
+                                FileInputStream vol;
+                                Image imgVol;
                                 vol = new FileInputStream("src/tronv2/img/NEY_A.png");
                                 imgVol = new Image(vol);
-                                backImg = new BackgroundImage(imgVol, null, null, null, null);
                                 btnVolume.setGraphic(new ImageView(imgVol));
                             } 
                             catch (FileNotFoundException ex) 
@@ -276,20 +275,15 @@ public class TronV2 extends Application
                     @Override
                     public void handle(ActionEvent event) 
                     {
-                        FileInputStream vol;
-                        Image imgVol;
-                        BackgroundImage backImg;
+                        
                         if(musicOn)
                         {
                             try 
                             {
-                                vol = new FileInputStream("src/tronv2/img/TEY_A.png");
-                                imgVol = new Image(vol);
-                                backImg = new BackgroundImage(imgVol, null, null, null, null);
-                                btnVolume.setGraphic(new ImageView(imgVol));
+                                FileInputStream vol;
+                                Image imgVol;
                                 vol = new FileInputStream("src/tronv2/img/NEY.png");
                                 imgVol = new Image(vol);
-                                backImg = new BackgroundImage(imgVol, null, null, null, null);
                                 btnVolume.setGraphic(new ImageView(imgVol));
                                 musicOn=musicGame.stopMusic();
                             } 
@@ -303,13 +297,10 @@ public class TronV2 extends Application
                         {
                             try 
                             {
-                                vol = new FileInputStream("src/tronv2/img/NEY_A.png");
-                                imgVol = new Image(vol);
-                                backImg = new BackgroundImage(imgVol, null, null, null, null);
-                                btnVolume.setGraphic(new ImageView(imgVol));
+                                FileInputStream vol;
+                                Image imgVol;
                                 vol = new FileInputStream("src/tronv2/img/TEY.png");
                                 imgVol = new Image(vol);
-                                backImg = new BackgroundImage(imgVol, null, null, null, null);
                                 btnVolume.setGraphic(new ImageView(imgVol));
                                 musicOn=musicGame.playMusic();
                             } 
@@ -327,246 +318,952 @@ public class TronV2 extends Application
             }
         });
         
-        
-        btnPlay.setOnAction(new EventHandler<ActionEvent>() 
+        btnParam.setOnAction(new EventHandler<ActionEvent>() 
         {
             @Override
             public void handle(ActionEvent event) 
             {
-                Group root = new Group();
-                Scene scene = new Scene(root, 750, 750,Color.BLACK);
-                primaryStage.setScene(scene);
-                primaryStage.show();
-                if(musicOn)
-                {
-                    musicGame.stopMusic();
-                    try 
-                    {
-                        musicGame = new MusicPlayer("src/tronv2/musics/powerwalkin-by-future-joust-electro-music.wav");
-                    } 
-                    catch (IOException ex) 
-                    {
-                        Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    musicGame.playMusic();
-                }
-                player1.start();
-                player2.start();
-                
-                player1.moveRight();
-                player2.moveLeft();
-
-                
-                root.getChildren().add(motoB);
-                root.getChildren().add(motoR);
-                motoB.rotateProperty().setValue(0);
-                motoR.rotateProperty().setValue(180);
-                
-                Button btnMenu = new Button();
-                btnMenu.setText("Quit");
-                btnMenu.setTranslateY(300);
-                btnMenu.setTranslateX(350);
-                btnMenu.toFront();
-                btnMenu.setOnAction(new EventHandler<ActionEvent>() 
-                {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        //System.out.println("Menu");
-                        primaryStage.setScene(menu);
-                        primaryStage.show();
-                        itsTimer.cancel();
-                        redTab.clear();
-                        blueTab.clear();
-                                
-                        motoB.translateXProperty().set(0);
-                        motoB.translateYProperty().set(0);
-                        motoR.translateXProperty().set(0);
-                        motoR.translateYProperty().set(0);
-                        motoB.rotateProperty().setValue(0);
-                        motoR.rotateProperty().setValue(180);
-                        if(musicOn)
-                        {
-                            musicGame.stopMusic();
-                            try 
-                            {
-                                musicGame = new MusicPlayer("src/tronv2/musics/daft-punk-the-game-has-changed-tron-legacy.wav");
-                            } 
-                            catch (IOException ex) 
-                            {
-                                Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        musicGame.playMusic();
-                        }
-                }
-            });
-                    
-                            
-                    
+                AnchorPane root = new AnchorPane();
+                root.setStyle("-fx-background-color: #000000;");
+                Scene scene = new Scene(root, 750, 750);
                
+                primaryStage.setScene(scene);
                 
-                TimerTask gameLoop = new TimerTask() 
+                
+                try 
+                {
+                    FileInputStream chx = new FileInputStream("src/tronv2/img/Menu_Choice.jpg");
+                    Image imgChx = new Image(chx);
+                    ImageView menuChoice = new ImageView(imgChx);
+                    root.getChildren().add(menuChoice);
+                    menuChoice.toBack();
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                Button btnPlay = new Button();    
+                btnPlay.setLayoutX(500);
+                btnPlay.setLayoutY(620);
+                btnPlay.setMinSize(200, 60);
+                btnPlay.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream ply = new FileInputStream("src/tronv2/img/play_btn.png");
+                    Image imgPly = new Image(ply);
+                    ImageView play = new ImageView(imgPly);
+                    play.setLayoutX(500);
+                    play.setLayoutY(620);
+                    root.getChildren().add(play);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                
+                // Group
+                Button btnBlue1 = new Button();
+                btnBlue1.setLayoutX(200);
+                btnBlue1.setLayoutY(200);
+                btnBlue1.setMinSize(40, 40);
+                btnBlue1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_B.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(200);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnBlue1.setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
-                    public void run()
+                    public void handle(ActionEvent event) 
                     {
-                        Platform.runLater(() ->
+                        try 
                         {
-                            player1.draw();
-                            player2.draw();
-                            
-                            
-                            Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
-                            blueLine.setStroke(Color.BLUE);
-                            blueLine.setStrokeWidth(5);
-
-                            Wall blueWall = new Wall (blueLine);
-                            root.getChildren().add(blueLine);
-                            blueWall.setPosX((int) player1.getPosX());
-                            blueWall.setPosY((int) player1.getPosY());
-                            
-                            Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
-                            redLine.setStroke(Color.RED);
-                            redLine.setStrokeWidth(5);
-
-                            Wall redWall = new Wall (redLine);
-                            root.getChildren().add(redLine);
-                            redWall.setPosX((int) player2.getPosX());
-                            redWall.setPosY((int) player2.getPosY());
-                            
-                            
-                            motoB.setX(player1.getPosX()-24);
-                            motoB.setY(player1.getPosY()-15);
-                            motoR.setX(player2.getPosX()-9);
-                            motoR.setY(player2.getPosY()-18);
-                            
-                            
-                            blueTab.add(blueWall);
-                            redTab.add(redWall);
-                            
-                            if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab))
-                            {
-                                itsTimer.cancel();
-                                blueTab.clear();
-                                redTab.clear();
-                                motoR.toBack();
-                                motoB.toBack();
-                                btnMenu.toFront();
-                                motoB.translateXProperty().set(0);
-                                motoB.translateYProperty().set(0);
-                                motoR.translateXProperty().set(0);
-                                motoR.translateYProperty().set(0);
-                                motoB.rotateProperty().setValue(0);
-                                motoR.rotateProperty().setValue(180);
-                                root.getChildren().add(btnMenu);
-                            }
-                            motoR.toFront();
-                            motoB.toFront();
-                            
-                        });
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/blue_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=BLUE;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                };
-                
-                itsTimer = new Timer();
-                itsTimer.schedule(gameLoop, 1000,4);
-
-                scene.setOnKeyPressed(key ->
+            
+                });
+                Button btnRed1 = new Button();
+                btnRed1.setLayoutX(280);
+                btnRed1.setLayoutY(200);
+                btnRed1.setMinSize(40, 40);
+                btnRed1.setStyle("-fx-background-color: transparent;");
+                try 
                 {
-                    KeyCode keyCode = key.getCode();
-                    if(keyCode.equals(KeyCode.D))
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_R.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(280);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnRed1.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
                     {
-                        player1.moveRight();
-                        
-                        if(!player1.getMoveLeft())
+                        try 
                         {
-                            motoB.rotateProperty().setValue(0);
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/red_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=RED;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                Button btnYellow1 = new Button();
+                btnYellow1.setLayoutX(360);
+                btnYellow1.setLayoutY(200);
+                btnYellow1.setMinSize(40, 40);
+                btnYellow1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_Y.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(360);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                    
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnYellow1.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/yellow_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=YELLOW;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                Button btnCyan1 = new Button();
+                btnCyan1.setLayoutX(440);
+                btnCyan1.setLayoutY(200);
+                btnCyan1.setMinSize(40, 40);
+                btnCyan1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_C.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(440);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnCyan1.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/cyan_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=CYAN;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                Button btnPurple1 = new Button();
+                btnPurple1.setLayoutX(520);
+                btnPurple1.setLayoutY(200);
+                btnPurple1.setMinSize(40, 40);
+                btnPurple1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_Pur.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(520);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnPurple1.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/purple_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=PURPLE;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                Button btnPink1 = new Button();
+                btnPink1.setLayoutX(600);
+                btnPink1.setLayoutY(200);
+                btnPink1.setMinSize(40, 40);
+                btnPink1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_P.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(600);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnPink1.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/pink_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=PINK;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                Button btnGreen1 = new Button();
+                btnGreen1.setLayoutX(680);
+                btnGreen1.setLayoutY(200);
+                btnGreen1.setMinSize(40, 40);
+                btnGreen1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_V.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(680);
+                    color.setLayoutY(200);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnGreen1.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt1 = new FileInputStream("src/tronv2/img/green_moto.png");
+                            Image imgMt1 = new Image(mt1);
+                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setLayoutX(70);
+                            moto1.setLayoutY(160);
+                            root.getChildren().add(moto1);
+                            colorP1=GREEN;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                
+
+ 
+                Button btnBlue2 = new Button();
+                btnBlue2.setLayoutX(200);
+                btnBlue2.setLayoutY(300);
+                btnBlue2.setMinSize(40, 40);
+                btnBlue2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_B.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(200);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnBlue2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/blue_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=BLUE;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                
+                Button btnRed2 = new Button();
+                btnRed2.setLayoutX(280);
+                btnRed2.setLayoutY(300);
+                btnRed2.setMinSize(40, 40);
+                btnRed2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_R.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(280);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnRed2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/red_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=RED;
+                            
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                
+                Button btnYellow2 = new Button();
+                btnYellow2.setLayoutX(360);
+                btnYellow2.setLayoutY(300);
+                btnYellow2.setMinSize(40, 40);
+                btnYellow2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_Y.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(360);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnYellow2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/yellow_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=YELLOW;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                
+                Button btnCyan2 = new Button();
+                btnCyan2.setLayoutX(440);
+                btnCyan2.setLayoutY(300);
+                btnCyan2.setMinSize(40, 40);
+                btnCyan2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_C.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(440);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnCyan2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/cyan_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=CYAN;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                  
+                Button btnPurple2 = new Button();
+                btnPurple2.setLayoutX(520);
+                btnPurple2.setLayoutY(300);
+                btnPurple2.setMinSize(40, 40);
+                btnPurple2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_Pur.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(520);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnPurple2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/purple_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=PURPLE;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                
+                Button btnPink2 = new Button();
+                btnPink2.setLayoutX(600);
+                btnPink2.setLayoutY(300);
+                btnPink2.setMinSize(40, 40);
+                btnPink2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_P.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(600);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnPink2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/pink_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=PINK;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                Button btnGreen2 = new Button();
+                btnGreen2.setLayoutX(680);
+                btnGreen2.setLayoutY(300);
+                btnGreen2.setMinSize(40, 40);
+                btnGreen2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream clr = new FileInputStream("src/tronv2/img/Chx_V.png");
+                    Image imgClr = new Image(clr);
+                    ImageView color = new ImageView(imgClr);
+                    color.setLayoutX(680);
+                    color.setLayoutY(300);
+                    root.getChildren().add(color);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                btnGreen2.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        try 
+                        {
+                            FileInputStream mt2 = new FileInputStream("src/tronv2/img/green_moto.png");
+                            Image imgMt2 = new Image(mt2);
+                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setLayoutX(70);
+                            moto2.setLayoutY(260);
+                            root.getChildren().add(moto2);
+                            colorP2=GREEN;
+                        } 
+                        catch (FileNotFoundException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+            
+                });
+                
+                
+                
+                try 
+                {
+                    FileInputStream mt1 = new FileInputStream("src/tronv2/img/blue_moto.png");
+                    Image imgMt1 = new Image(mt1);
+                    ImageView moto1 = new ImageView(imgMt1);
+                    moto1.setLayoutX(70);
+                    moto1.setLayoutY(160);
+                    root.getChildren().add(moto1);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try 
+                {
+                    FileInputStream mt2 = new FileInputStream("src/tronv2/img/red_moto.png");
+                    Image imgMt2 = new Image(mt2);
+                    ImageView moto2 = new ImageView(imgMt2);
+                    moto2.setLayoutX(70);
+                    moto2.setLayoutY(260);
+                    root.getChildren().add(moto2);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                
+                Button dif0 = new Button();
+                dif0.setLayoutX(300);
+                dif0.setLayoutY(415);
+                dif0.setOnAction(new EventHandler<ActionEvent>()
+                        {
+                            @Override
+                            public void handle(ActionEvent event) 
+                            {
+                                
+                            }                       
+                        });
+                dif0.setMinSize(30,30);
+                Button dif1 = new Button();
+                dif1.setLayoutX(300);
+                dif1.setLayoutY(460);
+                dif1.setMinSize(30,30);
+                Button dif2 = new Button();
+                dif2.setLayoutX(300);
+                dif2.setLayoutY(510);
+                dif2.setMinSize(30,30);
+                Button dif3 = new Button();
+                dif3.setLayoutX(300);
+                dif3.setLayoutY(555);
+                dif3.setMinSize(30,30);
+                
+                
+                
+                root.getChildren().add(btnBlue1);
+                root.getChildren().add(btnRed1);
+                root.getChildren().add(btnYellow1);
+                root.getChildren().add(btnCyan1);
+                root.getChildren().add(btnPurple1);
+                root.getChildren().add(btnPink1);
+                root.getChildren().add(btnGreen1);
+                root.getChildren().add(btnBlue2);
+                root.getChildren().add(btnRed2);
+                root.getChildren().add(btnYellow2);
+                root.getChildren().add(btnCyan2);
+                root.getChildren().add(btnPurple2);
+                root.getChildren().add(btnPink2);
+                root.getChildren().add(btnGreen2);
+                root.getChildren().add(btnPlay);
+                root.getChildren().add(dif0);
+                root.getChildren().add(dif1);
+                root.getChildren().add(dif2);
+                root.getChildren().add(dif3);
+                
+                
+                
+                
+                
+                
+                
+                
+                btnPlay.setOnAction(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                public void handle(ActionEvent event) 
+                {
+                    Group root = new Group();
+                    Scene scene = new Scene(root, 750, 750,Color.BLACK);
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                    if(musicOn)
+                    {
+                        musicGame.stopMusic();
+                        try 
+                        {
+                            musicGame = new MusicPlayer("src/tronv2/musics/powerwalkin-by-future-joust-electro-music.wav");
+                        } 
+                        catch (IOException ex) 
+                        {
+                            Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        musicGame.playMusic();
+                    }
+                    player1.start();
+                    player2.start();
+                
+                    player1.moveRight();
+                    player2.moveLeft();
+
+                
+                    root.getChildren().add(motoB);
+                    root.getChildren().add(motoR);
+                    motoB.rotateProperty().setValue(0);
+                    motoR.rotateProperty().setValue(180);
+                
+                
+                    Button btnMenu = new Button();
+                    btnMenu.setText("Quit");
+
+                    btnMenu.toFront();
+          
+                
+                    btnMenu.setOnAction(new EventHandler<ActionEvent>() 
+                    {
+                        @Override
+                        public void handle(ActionEvent event) 
+                        {
+       
+                            primaryStage.setScene(menu);
+                            primaryStage.show();
+                            itsTimer.cancel();
+                            redTab.clear();
+                            blueTab.clear();
+                                
                             motoB.translateXProperty().set(0);
                             motoB.translateYProperty().set(0);
-                        }
-                        
-                    }
-                    if(keyCode.equals(KeyCode.S))
-                    {
-                        player1.moveDown();
-                        
-                        if(!player1.getMoveUp())
-                        {
-                            motoB.rotateProperty().setValue(90);
-                            motoB.translateXProperty().set(7);
-                            motoB.translateYProperty().set(-7);
-                        }
-                    }
-                    if(keyCode.equals(KeyCode.Q))
-                    {
-                        player1.moveLeft();
-                        
-                        if(!player1.getMoveRight())
-                        {
-                            motoB.rotateProperty().setValue(180);
-                            motoB.translateXProperty().set(17);
-                            motoB.translateYProperty().set(-4);
-                        }
-                    }
-                    if(keyCode.equals(KeyCode.Z))
-                    {
-                        player1.moveUp();
-                        
-                        if(!player1.getMoveDown())
-                        {
-                            motoB.rotateProperty().setValue(-90);
-                            motoB.translateXProperty().set(10);
-                            motoB.translateYProperty().set(6);
-                        }
-                    }
-                    
-                    
-                    
-                    if(keyCode.equals(KeyCode.RIGHT))
-                    {
-                        player2.moveRight();
-                        
-                        if(!player2.getMoveLeft())
-                        {
-                            motoR.rotateProperty().setValue(0);
-                            motoR.translateXProperty().set(-15);
-                            motoR.translateYProperty().set(3);
-                        }
-                    }
-                    if(keyCode.equals(KeyCode.DOWN))
-                    {
-                        player2.moveDown();
-                        
-                        if(!player2.getMoveUp())
-                        {
-                            motoR.rotateProperty().setValue(90);
-                            motoR.translateXProperty().set(-8);
-                            motoR.translateYProperty().set(-7);
-                        }
-                    }
-                    if(keyCode.equals(KeyCode.LEFT))
-                    {
-                        player2.moveLeft();
-                        
-                        if(!player2.getMoveRight())
-                        {
-                            motoR.rotateProperty().setValue(180);
                             motoR.translateXProperty().set(0);
                             motoR.translateYProperty().set(0);
+                            motoB.rotateProperty().setValue(0);
+                            motoR.rotateProperty().setValue(180);
+                            if(musicOn)
+                            {
+                                musicGame.stopMusic();
+                                try 
+                                {
+                                    musicGame = new MusicPlayer("src/tronv2/musics/daft-punk-the-game-has-changed-tron-legacy.wav");
+                                } 
+                                catch (IOException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            musicGame.playMusic();
+                            }
                         }
-                    }
-                    if(keyCode.equals(KeyCode.UP))
+                    });
+                    TimerTask gameLoop = new TimerTask() 
                     {
-                        player2.moveUp();
-                        
-                        if(!player2.getMoveDown())
+                        @Override
+                        public void run()
                         {
-                            motoR.rotateProperty().setValue(-90);
-                            motoR.translateXProperty().set(-5);
-                            motoR.translateYProperty().set(8);
+                            Platform.runLater(() ->
+                            {
+                                player1.draw();
+                                player2.draw();
+                            
+                            
+                                Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
+                                blueLine.setStroke(colorP1);
+                                blueLine.setStrokeWidth(5);
+
+                                Wall blueWall = new Wall (blueLine);
+                                root.getChildren().add(blueLine);
+                                blueWall.setPosX((int) player1.getPosX());
+                                blueWall.setPosY((int) player1.getPosY());
+                            
+                                Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
+                                redLine.setStroke(colorP2);
+                                redLine.setStrokeWidth(5);
+
+                                Wall redWall = new Wall (redLine);
+                                root.getChildren().add(redLine);
+                                redWall.setPosX((int) player2.getPosX());
+                                redWall.setPosY((int) player2.getPosY());
+                            
+                            
+                                motoB.setX(player1.getPosX()-24);
+                                motoB.setY(player1.getPosY()-15);
+                                motoR.setX(player2.getPosX()-9);
+                                motoR.setY(player2.getPosY()-18);
+                            
+                            
+                                blueTab.add(blueWall);
+                                redTab.add(redWall);
+                            
+                                if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab))
+                                {
+                                    itsTimer.cancel();
+                                    blueTab.clear();
+                                    redTab.clear();
+                                    motoR.toBack();
+                                    motoB.toBack();
+
+                                    motoB.translateXProperty().set(0);
+                                    motoB.translateYProperty().set(0);
+                                    motoR.translateXProperty().set(0);
+                                    motoR.translateYProperty().set(0);
+                                    motoB.rotateProperty().setValue(0);
+                                    motoR.rotateProperty().setValue(180);
+
+                                }
+                                motoR.toFront();
+                                motoB.toFront();
+                            
+                            });
                         }
-                    }
+                    };
+                
+                    itsTimer = new Timer();
+                    itsTimer.schedule(gameLoop, 1000,4);
+
+                    scene.setOnKeyPressed(key ->
+                    {
+                        KeyCode keyCode = key.getCode();
+                        if(keyCode.equals(KeyCode.D))
+                        {
+                            player1.moveRight();
+                        
+                            if(!player1.getMoveLeft())
+                            {
+                                motoB.rotateProperty().setValue(0);
+                                motoB.translateXProperty().set(0);
+                                motoB.translateYProperty().set(0);
+                            }          
+                        }
+                        if(keyCode.equals(KeyCode.S))
+                        {
+                            player1.moveDown();
+                        
+                            if(!player1.getMoveUp())
+                            {
+                                motoB.rotateProperty().setValue(90);
+                                motoB.translateXProperty().set(7);
+                                motoB.translateYProperty().set(-7);
+                            }
+                        }
+                        if(keyCode.equals(KeyCode.Q))
+                        {
+                            player1.moveLeft();
+                        
+                            if(!player1.getMoveRight())
+                            {
+                                motoB.rotateProperty().setValue(180);
+                                motoB.translateXProperty().set(17);
+                                motoB.translateYProperty().set(-4);
+                            }
+                        }
+                        if(keyCode.equals(KeyCode.Z))
+                        {
+                            player1.moveUp();
+                        
+                            if(!player1.getMoveDown())
+                            {
+                                motoB.rotateProperty().setValue(-90);
+                                motoB.translateXProperty().set(10);
+                                motoB.translateYProperty().set(6);
+                            }
+                        }
+                    
+                    
+                    
+                        if(keyCode.equals(KeyCode.RIGHT))
+                        {
+                            player2.moveRight();
+                        
+                            if(!player2.getMoveLeft())
+                            {
+                                motoR.rotateProperty().setValue(0);
+                                motoR.translateXProperty().set(-15);
+                                motoR.translateYProperty().set(3);
+                            }
+                        }
+                        if(keyCode.equals(KeyCode.DOWN))
+                        {
+                            player2.moveDown();
+                        
+                            if(!player2.getMoveUp())
+                            {
+                                motoR.rotateProperty().setValue(90);
+                                motoR.translateXProperty().set(-8);
+                                motoR.translateYProperty().set(-7);
+                            }
+                        }
+                        if(keyCode.equals(KeyCode.LEFT))
+                        {
+                            player2.moveLeft();
+                        
+                            if(!player2.getMoveRight())
+                            {
+                                motoR.rotateProperty().setValue(180);
+                                motoR.translateXProperty().set(0);
+                                motoR.translateYProperty().set(0);
+                            }
+                        }
+                        if(keyCode.equals(KeyCode.UP))
+                        {
+                            player2.moveUp();
+                        
+                            if(!player2.getMoveDown())
+                            {
+                                motoR.rotateProperty().setValue(-90);
+                                motoR.translateXProperty().set(-5);
+                                motoR.translateYProperty().set(8);
+                            }
+                        }
+                    });
+                }
                 });
-            }
-        });
+                
+                primaryStage.show();
+                
+            }  
+        });    
     }
 
     /**
