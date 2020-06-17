@@ -90,13 +90,15 @@ public class TronV2 extends Application
         root.getChildren().add(btnParam);
         root.getChildren().add(btnOption);
         
-        FileInputStream inputB = new FileInputStream("src/tronv2/img/moto.png");
+        FileInputStream inputB = new FileInputStream("src/tronv2/img/blue_moto.png");
         Image imageMotoB = new Image(inputB, 32, 32, false, false);
-        ImageView motoB = new ImageView(imageMotoB);
-                
+        ImageView moto1 = new ImageView();
+        moto1.setImage(imageMotoB);
+        
         FileInputStream inputR = new FileInputStream("src/tronv2/img/moto2.png");
         Image imageMotoR = new Image(inputR, 32, 32, false, false);
-        ImageView motoR = new ImageView(imageMotoR);
+        ImageView moto2 = new ImageView();
+        moto2.setImage(imageMotoR);
         
         Player player1 = new Player(1, 50, 375);
         Player player2 = new Player(2, 650, 375);
@@ -433,7 +435,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/red_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setImage(imgMt1);
                             moto1.setLayoutX(70);
                             moto1.setLayoutY(160);
                             root.getChildren().add(moto1);
@@ -474,7 +476,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/yellow_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setImage(imgMt1);
                             moto1.setLayoutX(70);
                             moto1.setLayoutY(160);
                             root.getChildren().add(moto1);
@@ -514,7 +516,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/cyan_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setImage(imgMt1);
                             moto1.setLayoutX(70);
                             moto1.setLayoutY(160);
                             root.getChildren().add(moto1);
@@ -554,7 +556,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/purple_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setImage(imgMt1);
                             moto1.setLayoutX(70);
                             moto1.setLayoutY(160);
                             root.getChildren().add(moto1);
@@ -594,7 +596,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/pink_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setImage(imgMt1);
                             moto1.setLayoutX(70);
                             moto1.setLayoutY(160);
                             root.getChildren().add(moto1);
@@ -634,7 +636,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/green_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
+                            moto1.setImage(imgMt1);
                             moto1.setLayoutX(70);
                             moto1.setLayoutY(160);
                             root.getChildren().add(moto1);
@@ -677,7 +679,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/blue_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -718,7 +720,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/red_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -760,7 +762,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/yellow_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -801,7 +803,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/cyan_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -842,7 +844,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/purple_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -883,7 +885,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/pink_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -923,7 +925,7 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/green_moto.png");
                             Image imgMt2 = new Image(mt2);
-                            ImageView moto2 = new ImageView(imgMt2);
+                            moto2.setImage(imgMt2);
                             moto2.setLayoutX(70);
                             moto2.setLayoutY(260);
                             root.getChildren().add(moto2);
@@ -1022,7 +1024,6 @@ public class TronV2 extends Application
                 
                 
                 
-                
                 btnPlay.setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
@@ -1051,11 +1052,20 @@ public class TronV2 extends Application
                     player1.moveRight();
                     player2.moveLeft();
 
-                
-                    root.getChildren().add(motoB);
-                    root.getChildren().add(motoR);
-                    motoB.rotateProperty().setValue(0);
-                    motoR.rotateProperty().setValue(180);
+                    moto1.setLayoutX(0);
+                    moto1.setLayoutY(0);
+                    moto1.setFitHeight(32);
+                    moto1.setFitWidth(32);
+                    
+                    moto2.setLayoutX(0);
+                    moto2.setLayoutY(0);
+                    moto2.setFitHeight(32);
+                    moto2.setFitWidth(32);
+                    
+                    root.getChildren().add(moto1);
+                    root.getChildren().add(moto2);
+                    moto1.rotateProperty().setValue(0);
+                    moto2.rotateProperty().setValue(180);
                 
                 
                     Button btnMenu = new Button();
@@ -1076,12 +1086,12 @@ public class TronV2 extends Application
                             redTab.clear();
                             blueTab.clear();
                                 
-                            motoB.translateXProperty().set(0);
-                            motoB.translateYProperty().set(0);
-                            motoR.translateXProperty().set(0);
-                            motoR.translateYProperty().set(0);
-                            motoB.rotateProperty().setValue(0);
-                            motoR.rotateProperty().setValue(180);
+                            moto1.translateXProperty().set(0);
+                            moto1.translateYProperty().set(0);
+                            moto2.translateXProperty().set(0);
+                            moto2.translateYProperty().set(0);
+                            moto1.rotateProperty().setValue(0);
+                            moto2.rotateProperty().setValue(180);
                             if(musicOn)
                             {
                                 musicGame.stopMusic();
@@ -1127,10 +1137,10 @@ public class TronV2 extends Application
                                 redWall.setPosY((int) player2.getPosY());
                             
                             
-                                motoB.setX(player1.getPosX()-24);
-                                motoB.setY(player1.getPosY()-15);
-                                motoR.setX(player2.getPosX()-9);
-                                motoR.setY(player2.getPosY()-18);
+                                moto1.setX(player1.getPosX()-24);
+                                moto1.setY(player1.getPosY()-15);
+                                moto2.setX(player2.getPosX()-9);
+                                moto2.setY(player2.getPosY()-18);
                             
                             
                                 blueTab.add(blueWall);
@@ -1141,19 +1151,19 @@ public class TronV2 extends Application
                                     itsTimer.cancel();
                                     blueTab.clear();
                                     redTab.clear();
-                                    motoR.toBack();
-                                    motoB.toBack();
+                                    moto2.toBack();
+                                    moto1.toBack();
 
-                                    motoB.translateXProperty().set(0);
-                                    motoB.translateYProperty().set(0);
-                                    motoR.translateXProperty().set(0);
-                                    motoR.translateYProperty().set(0);
-                                    motoB.rotateProperty().setValue(0);
-                                    motoR.rotateProperty().setValue(180);
+                                    moto1.translateXProperty().set(0);
+                                    moto1.translateYProperty().set(0);
+                                    moto2.translateXProperty().set(0);
+                                    moto2.translateYProperty().set(0);
+                                    moto1.rotateProperty().setValue(0);
+                                    moto2.rotateProperty().setValue(180);
 
                                 }
-                                motoR.toFront();
-                                motoB.toFront();
+                                moto2.toFront();
+                                moto1.toFront();
                             
                             });
                         }
@@ -1171,9 +1181,9 @@ public class TronV2 extends Application
                         
                             if(!player1.getMoveLeft())
                             {
-                                motoB.rotateProperty().setValue(0);
-                                motoB.translateXProperty().set(0);
-                                motoB.translateYProperty().set(0);
+                                moto1.rotateProperty().setValue(0);
+                                moto1.translateXProperty().set(0);
+                                moto1.translateYProperty().set(0);
                             }          
                         }
                         if(keyCode.equals(KeyCode.S))
@@ -1182,9 +1192,9 @@ public class TronV2 extends Application
                         
                             if(!player1.getMoveUp())
                             {
-                                motoB.rotateProperty().setValue(90);
-                                motoB.translateXProperty().set(7);
-                                motoB.translateYProperty().set(-7);
+                                moto1.rotateProperty().setValue(90);
+                                moto1.translateXProperty().set(7);
+                                moto1.translateYProperty().set(-7);
                             }
                         }
                         if(keyCode.equals(KeyCode.Q))
@@ -1193,9 +1203,9 @@ public class TronV2 extends Application
                         
                             if(!player1.getMoveRight())
                             {
-                                motoB.rotateProperty().setValue(180);
-                                motoB.translateXProperty().set(17);
-                                motoB.translateYProperty().set(-4);
+                                moto1.rotateProperty().setValue(180);
+                                moto1.translateXProperty().set(17);
+                                moto1.translateYProperty().set(-4);
                             }
                         }
                         if(keyCode.equals(KeyCode.Z))
@@ -1204,9 +1214,9 @@ public class TronV2 extends Application
                         
                             if(!player1.getMoveDown())
                             {
-                                motoB.rotateProperty().setValue(-90);
-                                motoB.translateXProperty().set(10);
-                                motoB.translateYProperty().set(6);
+                                moto1.rotateProperty().setValue(-90);
+                                moto1.translateXProperty().set(10);
+                                moto1.translateYProperty().set(6);
                             }
                         }
                     
@@ -1218,9 +1228,9 @@ public class TronV2 extends Application
                         
                             if(!player2.getMoveLeft())
                             {
-                                motoR.rotateProperty().setValue(0);
-                                motoR.translateXProperty().set(-15);
-                                motoR.translateYProperty().set(3);
+                                moto2.rotateProperty().setValue(0);
+                                moto2.translateXProperty().set(-15);
+                                moto2.translateYProperty().set(3);
                             }
                         }
                         if(keyCode.equals(KeyCode.DOWN))
@@ -1229,9 +1239,9 @@ public class TronV2 extends Application
                         
                             if(!player2.getMoveUp())
                             {
-                                motoR.rotateProperty().setValue(90);
-                                motoR.translateXProperty().set(-8);
-                                motoR.translateYProperty().set(-7);
+                                moto2.rotateProperty().setValue(90);
+                                moto2.translateXProperty().set(-8);
+                                moto2.translateYProperty().set(-7);
                             }
                         }
                         if(keyCode.equals(KeyCode.LEFT))
@@ -1240,9 +1250,9 @@ public class TronV2 extends Application
                         
                             if(!player2.getMoveRight())
                             {
-                                motoR.rotateProperty().setValue(180);
-                                motoR.translateXProperty().set(0);
-                                motoR.translateYProperty().set(0);
+                                moto2.rotateProperty().setValue(180);
+                                moto2.translateXProperty().set(0);
+                                moto2.translateYProperty().set(0);
                             }
                         }
                         if(keyCode.equals(KeyCode.UP))
@@ -1251,9 +1261,9 @@ public class TronV2 extends Application
                         
                             if(!player2.getMoveDown())
                             {
-                                motoR.rotateProperty().setValue(-90);
-                                motoR.translateXProperty().set(-5);
-                                motoR.translateYProperty().set(8);
+                                moto2.rotateProperty().setValue(-90);
+                                moto2.translateXProperty().set(-5);
+                                moto2.translateYProperty().set(8);
                             }
                         }
                     });
