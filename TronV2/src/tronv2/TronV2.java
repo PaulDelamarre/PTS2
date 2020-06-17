@@ -57,6 +57,7 @@ public class TronV2 extends Application
     private static Color colorP1 = BLUE;
     private static Color colorP2 = RED;
     Boolean musicOn ;
+    private boolean colorChosen = false;
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException
     {
@@ -91,14 +92,19 @@ public class TronV2 extends Application
         root.getChildren().add(btnOption);
         
         FileInputStream inputB = new FileInputStream("src/tronv2/img/blue_moto.png");
-        Image imageMotoB = new Image(inputB, 32, 32, false, false);
-        ImageView moto1 = new ImageView();
-        moto1.setImage(imageMotoB);
+        Image imageMotoB = new Image(inputB, 100,100, false, false);
+        ImageView moto1 = new ImageView(imageMotoB);
+        ImageView moto1V = new ImageView(imageMotoB);
+        moto1V.setLayoutX(70);
+        moto1V.setLayoutY(160);
+        
         
         FileInputStream inputR = new FileInputStream("src/tronv2/img/moto2.png");
-        Image imageMotoR = new Image(inputR, 32, 32, false, false);
-        ImageView moto2 = new ImageView();
-        moto2.setImage(imageMotoR);
+        Image imageMotoR = new Image(inputR, 100, 100, false, false);
+        ImageView moto2 = new ImageView(imageMotoR);
+        ImageView moto2V = new ImageView(imageMotoR);
+        moto2V.setLayoutX(70);
+        moto2V.setLayoutY(260);
         
         Player player1 = new Player(1, 50, 375);
         Player player2 = new Player(2, 650, 375);
@@ -328,7 +334,8 @@ public class TronV2 extends Application
                 AnchorPane root = new AnchorPane();
                 root.setStyle("-fx-background-color: #000000;");
                 Scene scene = new Scene(root, 750, 750);
-               
+                root.getChildren().add(moto1V);
+                root.getChildren().add(moto2V);
                 primaryStage.setScene(scene);
                 
                 
@@ -395,10 +402,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/blue_moto.png");
                             Image imgMt1 = new Image(mt1);
-                            ImageView moto1 = new ImageView(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
+                            moto1V.setImage(imgMt1);
+                            moto1.setImage(imgMt1);
                             colorP1=BLUE;
                         } 
                         catch (FileNotFoundException ex) 
@@ -435,10 +440,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/red_moto.png");
                             Image imgMt1 = new Image(mt1);
+                            moto1V.setImage(imgMt1);
                             moto1.setImage(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
                             colorP1=RED;
                         } 
                         catch (FileNotFoundException ex) 
@@ -476,10 +479,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/yellow_moto.png");
                             Image imgMt1 = new Image(mt1);
+                            moto1V.setImage(imgMt1);
                             moto1.setImage(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
                             colorP1=YELLOW;
                         } 
                         catch (FileNotFoundException ex) 
@@ -516,10 +517,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/cyan_moto.png");
                             Image imgMt1 = new Image(mt1);
+                            moto1V.setImage(imgMt1);
                             moto1.setImage(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
                             colorP1=CYAN;
                         } 
                         catch (FileNotFoundException ex) 
@@ -556,10 +555,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/purple_moto.png");
                             Image imgMt1 = new Image(mt1);
+                            moto1V.setImage(imgMt1);
                             moto1.setImage(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
                             colorP1=PURPLE;
                         } 
                         catch (FileNotFoundException ex) 
@@ -596,10 +593,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/pink_moto.png");
                             Image imgMt1 = new Image(mt1);
+                            moto1V.setImage(imgMt1);
                             moto1.setImage(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
                             colorP1=PINK;
                         } 
                         catch (FileNotFoundException ex) 
@@ -636,10 +631,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt1 = new FileInputStream("src/tronv2/img/green_moto.png");
                             Image imgMt1 = new Image(mt1);
+                            moto1V.setImage(imgMt1);
                             moto1.setImage(imgMt1);
-                            moto1.setLayoutX(70);
-                            moto1.setLayoutY(160);
-                            root.getChildren().add(moto1);
                             colorP1=GREEN;
                         } 
                         catch (FileNotFoundException ex) 
@@ -679,10 +672,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/blue_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=BLUE;
                         } 
                         catch (FileNotFoundException ex) 
@@ -720,10 +711,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/red_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=RED;
                             
                         } 
@@ -762,10 +751,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/yellow_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=YELLOW;
                         } 
                         catch (FileNotFoundException ex) 
@@ -803,10 +790,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/cyan_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=CYAN;
                         } 
                         catch (FileNotFoundException ex) 
@@ -844,10 +829,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/purple_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=PURPLE;
                         } 
                         catch (FileNotFoundException ex) 
@@ -885,10 +868,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/pink_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=PINK;
                         } 
                         catch (FileNotFoundException ex) 
@@ -925,10 +906,8 @@ public class TronV2 extends Application
                         {
                             FileInputStream mt2 = new FileInputStream("src/tronv2/img/green_moto.png");
                             Image imgMt2 = new Image(mt2);
+                            moto2V.setImage(imgMt2);
                             moto2.setImage(imgMt2);
-                            moto2.setLayoutX(70);
-                            moto2.setLayoutY(260);
-                            root.getChildren().add(moto2);
                             colorP2=GREEN;
                         } 
                         catch (FileNotFoundException ex) 
@@ -938,37 +917,6 @@ public class TronV2 extends Application
                     }
             
                 });
-                
-                
-                
-                try 
-                {
-                    FileInputStream mt1 = new FileInputStream("src/tronv2/img/blue_moto.png");
-                    Image imgMt1 = new Image(mt1);
-                    ImageView moto1 = new ImageView(imgMt1);
-                    moto1.setLayoutX(70);
-                    moto1.setLayoutY(160);
-                    root.getChildren().add(moto1);
-                } 
-                catch (FileNotFoundException ex) 
-                {
-                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                try 
-                {
-                    FileInputStream mt2 = new FileInputStream("src/tronv2/img/red_moto.png");
-                    Image imgMt2 = new Image(mt2);
-                    ImageView moto2 = new ImageView(imgMt2);
-                    moto2.setLayoutX(70);
-                    moto2.setLayoutY(260);
-                    root.getChildren().add(moto2);
-                } 
-                catch (FileNotFoundException ex) 
-                {
-                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
                 
                 
                 Button dif0 = new Button();
@@ -1023,7 +971,6 @@ public class TronV2 extends Application
                 
                 
                 
-                
                 btnPlay.setOnAction(new EventHandler<ActionEvent>() 
                 {
                     @Override
@@ -1051,21 +998,29 @@ public class TronV2 extends Application
                 
                     player1.moveRight();
                     player2.moveLeft();
-
+                    
+                   
                     moto1.setLayoutX(0);
                     moto1.setLayoutY(0);
                     moto1.setFitHeight(32);
                     moto1.setFitWidth(32);
+
                     
                     moto2.setLayoutX(0);
                     moto2.setLayoutY(0);
                     moto2.setFitHeight(32);
                     moto2.setFitWidth(32);
                     
+                    
+                    
+                    root.getChildren().remove(moto1V);
+                    root.getChildren().remove(moto2V);
                     root.getChildren().add(moto1);
                     root.getChildren().add(moto2);
                     moto1.rotateProperty().setValue(0);
                     moto2.rotateProperty().setValue(180);
+                    colorChosen = true;
+                    
                 
                 
                     Button btnMenu = new Button();
@@ -1079,7 +1034,7 @@ public class TronV2 extends Application
                         @Override
                         public void handle(ActionEvent event) 
                         {
-       
+                            
                             primaryStage.setScene(menu);
                             primaryStage.show();
                             itsTimer.cancel();
@@ -1119,7 +1074,12 @@ public class TronV2 extends Application
                             
                             
                                 Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
-                                blueLine.setStroke(colorP1);
+                                if(colorChosen){
+                                   blueLine.setStroke(colorP1); 
+                                }
+                                else{
+                                    
+                                }
                                 blueLine.setStrokeWidth(5);
 
                                 Wall blueWall = new Wall (blueLine);
@@ -1128,7 +1088,12 @@ public class TronV2 extends Application
                                 blueWall.setPosY((int) player1.getPosY());
                             
                                 Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
-                                redLine.setStroke(colorP2);
+                                if(colorChosen){
+                                   redLine.setStroke(colorP2); 
+                                }
+                                else{
+                                    
+                                }
                                 redLine.setStrokeWidth(5);
 
                                 Wall redWall = new Wall (redLine);
