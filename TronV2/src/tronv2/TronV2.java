@@ -51,8 +51,8 @@ import javafx.stage.Stage;
 public class TronV2 extends Application 
 {
     Timer itsTimer;
-    private ArrayList blueTab = new ArrayList<Wall>();
-    private ArrayList redTab = new ArrayList<Wall>();
+    private ArrayList player1Tab = new ArrayList<Wall>();
+    private ArrayList player2Tab = new ArrayList<Wall>();
     MusicPlayer musicGame;
     private static Color colorP1 = BLUE;
     private static Color colorP2 = RED;
@@ -1038,8 +1038,8 @@ public class TronV2 extends Application
                             primaryStage.setScene(menu);
                             primaryStage.show();
                             itsTimer.cancel();
-                            redTab.clear();
-                            blueTab.clear();
+                            player2Tab.clear();
+                            player1Tab.clear();
                                 
                             moto1.translateXProperty().set(0);
                             moto1.translateYProperty().set(0);
@@ -1073,33 +1073,33 @@ public class TronV2 extends Application
                                 player2.draw();
                             
                             
-                                Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
+                                Line player1Line = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
                                 if(colorChosen){
-                                   blueLine.setStroke(colorP1); 
+                                   player1Line.setStroke(colorP1); 
                                 }
                                 else{
                                     
                                 }
-                                blueLine.setStrokeWidth(5);
+                                player1Line.setStrokeWidth(5);
 
-                                Wall blueWall = new Wall (blueLine);
-                                root.getChildren().add(blueLine);
-                                blueWall.setPosX((int) player1.getPosX());
-                                blueWall.setPosY((int) player1.getPosY());
+                                Wall player1Wall = new Wall (player1Line);
+                                root.getChildren().add(player1Line);
+                                player1Wall.setPosX((int) player1.getPosX());
+                                player1Wall.setPosY((int) player1.getPosY());
                             
-                                Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
+                                Line player2Line = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
                                 if(colorChosen){
-                                   redLine.setStroke(colorP2); 
+                                   player2Line.setStroke(colorP2); 
                                 }
                                 else{
                                     
                                 }
-                                redLine.setStrokeWidth(5);
+                                player2Line.setStrokeWidth(5);
 
-                                Wall redWall = new Wall (redLine);
-                                root.getChildren().add(redLine);
-                                redWall.setPosX((int) player2.getPosX());
-                                redWall.setPosY((int) player2.getPosY());
+                                Wall player2Wall = new Wall (player2Line);
+                                root.getChildren().add(player2Line);
+                                player2Wall.setPosX((int) player2.getPosX());
+                                player2Wall.setPosY((int) player2.getPosY());
                             
                             
                                 moto1.setX(player1.getPosX()-24);
@@ -1108,14 +1108,14 @@ public class TronV2 extends Application
                                 moto2.setY(player2.getPosY()-18);
                             
                             
-                                blueTab.add(blueWall);
-                                redTab.add(redWall);
+                                player1Tab.add(player1Wall);
+                                player2Tab.add(player2Wall);
                             
-                                if(collision.collisions(player1, player2, redWall,blueWall,blueTab,redTab))
+                                if(collision.collisions(player1, player2, player2Wall, player1Wall, player2Tab, player1Tab))
                                 {
                                     itsTimer.cancel();
-                                    blueTab.clear();
-                                    redTab.clear();
+                                    player1Tab.clear();
+                                    player2Tab.clear();
                                     moto2.toBack();
                                     moto1.toBack();
 
@@ -1125,6 +1125,19 @@ public class TronV2 extends Application
                                     moto2.translateYProperty().set(0);
                                     moto1.rotateProperty().setValue(0);
                                     moto2.rotateProperty().setValue(180);
+                                    
+                                    if(collision.headOnCollision(player1Wall, player2Wall))
+                                    {
+                                        System.out.println("Egalité");
+                                    }
+                                    else if(collision.collisionEdge(player2) || collision.player1Collision(player2Tab, player1Tab, player1Wall))
+                                    {
+                                        System.out.println("Le joueur 1 à gagné");
+                                    }
+                                    else if(collision.collisionEdge(player1) || collision.player2Collision(player2Tab, player1Tab, player2Wall))
+                                    {
+                                        System.out.println("Le joueur 2 à gagné");
+                                    }
 
                                 }
                                 moto2.toFront();

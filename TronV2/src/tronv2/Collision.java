@@ -66,7 +66,7 @@ public class Collision {
     * Méthode qui gère les collision du joueur bleu.
     * Renvoie : Un boolean vrai si le joueur bleu se retrouve face à un mur que ce soit le sien ou celui de l'adversaire
     */
-    public boolean blueCollision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall1)
+    public boolean player1Collision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall1)
     {
         boolean collision = false;
         for(int TheI = 0;TheI < redtab.size() -1 && collision == false;TheI++)
@@ -94,7 +94,7 @@ public class Collision {
     * Méthode qui gère les collision du joueur rouge.
     * Renvoie : Un boolean vrai si le joueur rouge se retrouve face à un mur que ce soit le sien ou celui de l'adversaire
     */
-    public boolean redCollision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall2)
+    public boolean player2Collision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall2)
     {
         boolean collision = false;
         for(int TheI = 0;TheI < bluetab.size()-1 && collision == false;TheI++)
@@ -126,10 +126,10 @@ public class Collision {
     * Renvoie : Un boolean vrai si l'un des deux joueurs à activé une des conditions de défaite vues précédément
     * Si ce boolean est vrai on arrête la partie.
     */
-    public boolean collisions(Player player1, Player player2, Wall redWall,Wall blueWall,ArrayList<Wall> bluetab,ArrayList<Wall> redtab)
+    public boolean collisions(Player player1, Player player2, Wall player2Wall,Wall player1Wall,ArrayList<Wall> player1tab,ArrayList<Wall> player2tab)
     {
         boolean ifOneIsTrue = false;
-        if(headOnCollision(blueWall, redWall))
+        if(headOnCollision(player1Wall, player2Wall))
         {
             ifOneIsTrue = true;
             System.out.println("Egalité");
@@ -138,25 +138,25 @@ public class Collision {
         else if(collisionEdge(player1))
         {
             ifOneIsTrue = true;
-            System.out.println("Joueur Rouge à gagné");
+            System.out.println("Le joueur 2 à gagné");
         }
         
         else if(collisionEdge(player2))
         {
             ifOneIsTrue = true;
-            System.out.println("Joueur Bleu à gagné");
+            System.out.println("Le joueur 1 à gagné");
         }
         
-        else if(blueCollision(redtab,bluetab, blueWall))
+        else if(player1Collision(player2tab, player1tab, player1Wall))
         {
             ifOneIsTrue = true;
-            System.out.println("joueur rouge à gagné");
+            System.out.println("Le joueur 1 à gagné");
         }
       
-        else if(redCollision(redtab,bluetab, redWall))
+        else if(player2Collision(player2tab, player1tab, player2Wall))
         {
             ifOneIsTrue = true;
-            System.out.println("joueur bleu à gagné");
+            System.out.println("Le joueur 2 à gagné");
         }
         
         return ifOneIsTrue;
