@@ -1111,7 +1111,7 @@ public class TronV2 extends Application
                                 player1Tab.add(player1Wall);
                                 player2Tab.add(player2Wall);
                             
-                                if(collision.collisions(player1, player2, player2Wall, player1Wall, player2Tab, player1Tab))
+                                if(collision.collisions(player1, player2, player2Wall, player1Wall, player1Tab, player2Tab))
                                 {
                                     itsTimer.cancel();
                                     player1Tab.clear();
@@ -1125,7 +1125,7 @@ public class TronV2 extends Application
                                     moto2.translateYProperty().set(0);
                                     moto1.rotateProperty().setValue(0);
                                     moto2.rotateProperty().setValue(180);
-                                    
+                                    /*
                                     if(collision.headOnCollision(player1Wall, player2Wall))
                                     {
                                         System.out.println("Egalité");
@@ -1138,6 +1138,7 @@ public class TronV2 extends Application
                                     {
                                         System.out.println("Le joueur 2 à gagné");
                                     }
+                                    */
 
                                 }
                                 moto2.toFront();

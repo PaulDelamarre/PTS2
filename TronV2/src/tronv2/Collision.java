@@ -48,11 +48,11 @@ public class Collision {
     * Méthode qui gère les collision entre les deux joueurs lorsqu'une égalité est ammenée à se produire.
     * Renvoie : Un boolean vrai si les deux joueurs se retrouvent face à face
     */
-    public boolean headOnCollision(Wall wall1, Wall wall2)
+    public boolean headOnCollision(Wall player1Wall, Wall player2Wall)
     {
         boolean headOnCollision = false;
         
-        if(wall2.getWallLine().intersects(wall1.getWallLine().getBoundsInLocal()) )
+        if(player2Wall.getWallLine().intersects(player1Wall.getWallLine().getBoundsInLocal()) )
         {
             headOnCollision = true;
         }
@@ -66,20 +66,20 @@ public class Collision {
     * Méthode qui gère les collision du joueur bleu.
     * Renvoie : Un boolean vrai si le joueur bleu se retrouve face à un mur que ce soit le sien ou celui de l'adversaire
     */
-    public boolean player1Collision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall1)
+    public boolean player1Collision(ArrayList<Wall> player2tab,ArrayList<Wall> player1tab, Wall player1wall)
     {
         boolean collision = false;
-        for(int TheI = 0;TheI < redtab.size() -1 && collision == false;TheI++)
+        for(int TheI = 0;TheI < player2tab.size() -1 && collision == false;TheI++)
         {
-            if(wall1.getWallLine().intersects(redtab.get(TheI).getWallLine().getBoundsInLocal()) )
+            if(player1wall.getWallLine().intersects(player2tab.get(TheI).getWallLine().getBoundsInLocal()) )
             {
                 collision = true;
             }
         } 
-        for(int TheI = bluetab.size()-1;TheI > 0 && collision == false;TheI--)
+        for(int TheI = player1tab.size()-1;TheI > 0 && collision == false;TheI--)
         {
             if(TheI > 60){
-                if(wall1.getWallLine().intersects(bluetab.get(TheI-55).getWallLine().getBoundsInLocal()) )
+                if(player1wall.getWallLine().intersects(player1tab.get(TheI-55).getWallLine().getBoundsInLocal()) )
                 {
                     collision = true;
                 }
@@ -94,21 +94,21 @@ public class Collision {
     * Méthode qui gère les collision du joueur rouge.
     * Renvoie : Un boolean vrai si le joueur rouge se retrouve face à un mur que ce soit le sien ou celui de l'adversaire
     */
-    public boolean player2Collision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall2)
+    public boolean player2Collision(ArrayList<Wall> player2tab,ArrayList<Wall> player1tab, Wall player2wall)
     {
         boolean collision = false;
-        for(int TheI = 0;TheI < bluetab.size()-1 && collision == false;TheI++)
+        for(int TheI = 0;TheI < player1tab.size()-1 && collision == false;TheI++)
         {
-            if(wall2.getWallLine().intersects(bluetab.get(TheI).getWallLine().getBoundsInLocal()))
+            if(player2wall.getWallLine().intersects(player1tab.get(TheI).getWallLine().getBoundsInLocal()))
             {
                 collision = true;
             }
         } 
-        for(int TheI = bluetab.size()-1;TheI > 0 && collision == false;TheI--)
+        for(int TheI = player1tab.size()-1;TheI > 0 && collision == false;TheI--)
         {
             if(TheI > 60)
             {
-                if(wall2.getWallLine().intersects(redtab.get(TheI-55).getWallLine().getBoundsInLocal()) )
+                if(player2wall.getWallLine().intersects(player2tab.get(TheI-55).getWallLine().getBoundsInLocal()) )
                 {
                     collision = true;
                 }
@@ -152,7 +152,7 @@ public class Collision {
             ifOneIsTrue = true;
             System.out.println("Le joueur 1 à gagné");
         }
-      
+        
         else if(player2Collision(player2tab, player1tab, player2Wall))
         {
             ifOneIsTrue = true;
