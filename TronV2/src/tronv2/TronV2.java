@@ -5,6 +5,9 @@
  */
 package tronv2;
 
+import tronv2.View.MusicPlayer;
+import tronv2.Model.Player;
+import tronv2.Model.Wall;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

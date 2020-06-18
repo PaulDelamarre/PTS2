@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tronv2;
+package tronv2.Model;
 
 import javafx.scene.shape.Line;
 

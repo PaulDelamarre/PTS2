@@ -6,7 +6,8 @@
 package tronv2;
 
 import java.util.ArrayList;
-
+import tronv2.Model.Player;
+import tronv2.Model.Wall;
 /**
  *
  * @author verri
