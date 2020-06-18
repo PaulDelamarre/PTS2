@@ -1366,33 +1366,33 @@ public class TronV2 extends Application
                                 player2.draw();
                             
                             
-                                Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
+                                Line p1Line = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
                                 if(colorChosen){
-                                   blueLine.setStroke(colorP1); 
+                                   p1Line.setStroke(colorP1); 
                                 }
                                 else{
                                     
                                 }
-                                blueLine.setStrokeWidth(5);
+                                p1Line.setStrokeWidth(5);
 
-                                Wall blueWall = new Wall (blueLine);
-                                root.getChildren().add(blueLine);
-                                blueWall.setPosX((int) player1.getPosX());
-                                blueWall.setPosY((int) player1.getPosY());
+                                Wall p1Wall = new Wall (p1Line);
+                                root.getChildren().add(p1Line);
+                                p1Wall.setPosX((int) player1.getPosX());
+                                p1Wall.setPosY((int) player1.getPosY());
                             
-                                Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
+                                Line p2Line = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
                                 if(colorChosen){
-                                   redLine.setStroke(colorP2); 
+                                   p2Line.setStroke(colorP2); 
                                 }
                                 else{
                                     
                                 }
-                                redLine.setStrokeWidth(5);
+                                p2Line.setStrokeWidth(5);
 
-                                Wall redWall = new Wall (redLine);
-                                root.getChildren().add(redLine);
-                                redWall.setPosX((int) player2.getPosX());
-                                redWall.setPosY((int) player2.getPosY());
+                                Wall p2Wall = new Wall (p2Line);
+                                root.getChildren().add(p2Line);
+                                p2Wall.setPosX((int) player2.getPosX());
+                                p2Wall.setPosY((int) player2.getPosY());
                             
                             
                                 moto1.setX(player1.getPosX()-24);
@@ -1401,13 +1401,13 @@ public class TronV2 extends Application
                                 moto2.setY(player2.getPosY()-18);
                             
                             
-                                P1Tab.add(blueWall);
-                                P2Tab.add(redWall);
+                                P1Tab.add(p1Wall);
+                                P2Tab.add(p2Wall);
                             
-                                if(collision.collisions(player1, player2, redWall,blueWall,P1Tab,P2Tab))
+                                if(collision.collisions(player1, player2, p2Wall,p1Wall,P1Tab,P2Tab))
                                 {
-                                    moto2.toBack();
-                                    moto1.toBack();
+                                    root.getChildren().remove(moto1);
+                                    root.getChildren().remove(moto2);
                                     itsTimer.cancel();
                                     P1Tab.clear();
                                     P2Tab.clear();

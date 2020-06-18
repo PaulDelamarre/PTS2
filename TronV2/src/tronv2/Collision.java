@@ -6,8 +6,6 @@
 package tronv2;
 
 import java.util.ArrayList;
-import static javafx.scene.paint.Color.BLUE;
-import static javafx.scene.paint.Color.RED;
 
 /**
  *
@@ -63,26 +61,26 @@ public class Collision {
     }
     
     /*
-    * Méthode blueCollision
+    * Méthode p1Collision
     * Paramètres : Un tableau de murs formés par le joueur rouge (Array de Wall), ainsi qu'un mur qui est l'avant du joueur bleu 
     * Méthode qui gère les collision du joueur bleu.
     * Renvoie : Un boolean vrai si le joueur bleu se retrouve face à un mur que ce soit le sien ou celui de l'adversaire
     */
-    public boolean blueCollision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall1)
+    public boolean p1Collision(ArrayList<Wall> p2tab,ArrayList<Wall> p1tab, Wall wall1)
     {
         boolean collision = false;
-        for(int TheI = 0;TheI < redtab.size() -1 && collision == false;TheI++)
+        for(int TheI = 0;TheI < p2tab.size() -1 && collision == false;TheI++)
         {
-            if(wall1.getWallLine().intersects(redtab.get(TheI).getWallLine().getBoundsInLocal()) )
+            if(wall1.getWallLine().intersects(p2tab.get(TheI).getWallLine().getBoundsInLocal()) )
             {
                 collision = true;
                 TronV2.colorVictory=TronV2.colorP2;
             }
         } 
-        for(int TheI = bluetab.size()-1;TheI > 0 && collision == false;TheI--)
+        for(int TheI = p1tab.size()-1;TheI > 0 && collision == false;TheI--)
         {
             if(TheI > 60){
-                if(wall1.getWallLine().intersects(bluetab.get(TheI-55).getWallLine().getBoundsInLocal()) )
+                if(wall1.getWallLine().intersects(p1tab.get(TheI-55).getWallLine().getBoundsInLocal()) )
                 {
                     collision = true;
                     TronV2.colorVictory=TronV2.colorP2;
@@ -93,27 +91,27 @@ public class Collision {
     }
     
     /*
-    * Méthode redCollision
+    * Méthode p2Collision
     * Paramètres : Un tableau de murs formés par le joueur bleu (Array de Wall), ainsi qu'un mur qui est l'avant du joueur rouge 
     * Méthode qui gère les collision du joueur rouge.
     * Renvoie : Un boolean vrai si le joueur rouge se retrouve face à un mur que ce soit le sien ou celui de l'adversaire
     */
-    public boolean redCollision(ArrayList<Wall> redtab,ArrayList<Wall> bluetab, Wall wall2)
+    public boolean p2Collision(ArrayList<Wall> p2tab,ArrayList<Wall> p1tab, Wall wall2)
     {
         boolean collision = false;
-        for(int TheI = 0;TheI < bluetab.size()-1 && collision == false;TheI++)
+        for(int TheI = 0;TheI < p1tab.size()-1 && collision == false;TheI++)
         {
-            if(wall2.getWallLine().intersects(bluetab.get(TheI).getWallLine().getBoundsInLocal()))
+            if(wall2.getWallLine().intersects(p1tab.get(TheI).getWallLine().getBoundsInLocal()))
             {
                 collision = true;
                 TronV2.colorVictory=TronV2.colorP1;
             }
         } 
-        for(int TheI = bluetab.size()-1;TheI > 0 && collision == false;TheI--)
+        for(int TheI = p1tab.size()-1;TheI > 0 && collision == false;TheI--)
         {
             if(TheI > 60)
             {
-                if(wall2.getWallLine().intersects(redtab.get(TheI-55).getWallLine().getBoundsInLocal()) )
+                if(wall2.getWallLine().intersects(p2tab.get(TheI-55).getWallLine().getBoundsInLocal()) )
                 {
                     collision = true;
                     TronV2.colorVictory=TronV2.colorP1;
@@ -132,10 +130,10 @@ public class Collision {
     * Renvoie : Un boolean vrai si l'un des deux joueurs à activé une des conditions de défaite vues précédément
     * Si ce boolean est vrai on arrête la partie.
     */
-    public boolean collisions(Player player1, Player player2, Wall redWall,Wall blueWall,ArrayList<Wall> bluetab,ArrayList<Wall> redtab)
+    public boolean collisions(Player player1, Player player2, Wall p2Wall,Wall p1Wall,ArrayList<Wall> p1tab,ArrayList<Wall> p2tab)
     {
         boolean ifOneIsTrue = false;
-        if(headOnCollision(blueWall, redWall))
+        if(headOnCollision(p1Wall, p2Wall))
         {
             ifOneIsTrue = true;
             System.out.println("Egalité");
@@ -153,13 +151,13 @@ public class Collision {
             System.out.println("Joueur Bleu à gagné");
         }
         
-        else if(blueCollision(redtab,bluetab, blueWall))
+        else if(p1Collision(p2tab,p1tab, p1Wall))
         {
             ifOneIsTrue = true;
             System.out.println("joueur rouge à gagné");
         }
       
-        else if(redCollision(redtab,bluetab, redWall))
+        else if(p2Collision(p2tab,p1tab, p2Wall))
         {
             ifOneIsTrue = true;
             System.out.println("joueur bleu à gagné");
