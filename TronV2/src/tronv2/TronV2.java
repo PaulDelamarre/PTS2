@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.BLUE;
@@ -40,6 +42,7 @@ import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.PINK;
 import static javafx.scene.paint.Color.PURPLE;
 import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.WHITE;
 import static javafx.scene.paint.Color.YELLOW;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -51,11 +54,13 @@ import javafx.stage.Stage;
 public class TronV2 extends Application 
 {
     Timer itsTimer;
-    private ArrayList player1Tab = new ArrayList<Wall>();
-    private ArrayList player2Tab = new ArrayList<Wall>();
+    private ArrayList P1Tab = new ArrayList<Wall>();
+    private ArrayList P2Tab = new ArrayList<Wall>();
     MusicPlayer musicGame;
-    private static Color colorP1 = BLUE;
-    private static Color colorP2 = RED;
+    static Color colorP1 = BLUE;
+    static Color colorP2 = RED;
+    static Color colorVictory = WHITE;
+    private double difficultyMulti;
     Boolean musicOn ;
     private boolean colorChosen = false;
     @Override
@@ -333,10 +338,10 @@ public class TronV2 extends Application
             {
                 AnchorPane root = new AnchorPane();
                 root.setStyle("-fx-background-color: #000000;");
-                Scene scene = new Scene(root, 750, 750);
+                Scene sceneOption = new Scene(root, 750, 750);
                 root.getChildren().add(moto1V);
                 root.getChildren().add(moto2V);
-                primaryStage.setScene(scene);
+                primaryStage.setScene(sceneOption);
                 
                 
                 try 
@@ -918,32 +923,359 @@ public class TronV2 extends Application
             
                 });
                 
-                
+                difficultyMulti=1;
                 Button dif0 = new Button();
                 dif0.setLayoutX(300);
                 dif0.setLayoutY(415);
+                dif0.setMinSize(39,39);
+                dif0.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream d0 = new FileInputStream("src/tronv2/img/dif.png");
+                    Image imgD0 = new Image(d0);
+                    ImageView dif0Img = new ImageView(imgD0);
+                    dif0Img.setLayoutX(300);
+                    dif0Img.setLayoutY(415);
+                    root.getChildren().add(dif0Img);
+                    dif0Img.toFront();
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Button dif1 = new Button();
+                dif1.setLayoutX(300);
+                dif1.setLayoutY(460);
+                dif1.setMinSize(39,39);
+                dif1.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream d1 = new FileInputStream("src/tronv2/img/dif_select.png");
+                    Image imgD1 = new Image(d1);
+                    ImageView dif1Img = new ImageView(imgD1);
+                    dif1Img.setLayoutX(300);
+                    dif1Img.setLayoutY(460);
+                    root.getChildren().add(dif1Img);
+                    dif1Img.toFront();
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Button dif2 = new Button();
+                dif2.setLayoutX(300);
+                dif2.setLayoutY(510);
+                dif2.setMinSize(39,39);
+                dif2.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream d2 = new FileInputStream("src/tronv2/img/dif.png");
+                    Image imgD2 = new Image(d2);
+                    ImageView dif2Img = new ImageView(imgD2);
+                    dif2Img.setLayoutX(300);
+                    dif2Img.setLayoutY(510);
+                    root.getChildren().add(dif2Img);
+                    dif2Img.toFront();
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Button dif3 = new Button();
+                dif3.setLayoutX(300);
+                dif3.setLayoutY(555);
+                dif3.setMinSize(39,39);
+                dif3.setStyle("-fx-background-color: transparent;");
+                try 
+                {
+                    FileInputStream d3 = new FileInputStream("src/tronv2/img/dif.png");
+                    Image imgD3 = new Image(d3);
+                    ImageView dif3Img = new ImageView(imgD3);
+                    dif3Img.setLayoutX(300);
+                    dif3Img.setLayoutY(555);
+                    root.getChildren().add(dif3Img);
+                    dif3Img.toFront();
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 dif0.setOnAction(new EventHandler<ActionEvent>()
                         {
                             @Override
                             public void handle(ActionEvent event) 
                             {
-                                
+                                difficultyMulti=1.5;
+                                try 
+                                {
+                                    FileInputStream d0 = new FileInputStream("src/tronv2/img/dif_select.png");
+                                    Image imgD0 = new Image(d0);
+                                    ImageView dif0Img = new ImageView(imgD0);
+                                    dif0Img.setLayoutX(300);
+                                    dif0Img.setLayoutY(415);
+                                    root.getChildren().add(dif0Img);
+                                    dif0Img.toFront();
+                                    dif0.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d1 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD1 = new Image(d1);
+                                    ImageView dif1Img = new ImageView(imgD1);
+                                    dif1Img.setLayoutX(300);
+                                    dif1Img.setLayoutY(460);
+                                    root.getChildren().add(dif1Img);
+                                    dif1Img.toFront();
+                                    dif1.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d2 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD2 = new Image(d2);
+                                    ImageView dif2Img = new ImageView(imgD2);
+                                    dif2Img.setLayoutX(300);
+                                    dif2Img.setLayoutY(510);
+                                    root.getChildren().add(dif2Img);
+                                    dif2Img.toFront();
+                                    dif2.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d3 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD3 = new Image(d3);
+                                    ImageView dif3Img = new ImageView(imgD3);
+                                    dif3Img.setLayoutX(300);
+                                    dif3Img.setLayoutY(555);
+                                    root.getChildren().add(dif3Img);
+                                    dif3Img.toFront();
+                                    dif3.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }                       
                         });
-                dif0.setMinSize(30,30);
-                Button dif1 = new Button();
-                dif1.setLayoutX(300);
-                dif1.setLayoutY(460);
-                dif1.setMinSize(30,30);
-                Button dif2 = new Button();
-                dif2.setLayoutX(300);
-                dif2.setLayoutY(510);
-                dif2.setMinSize(30,30);
-                Button dif3 = new Button();
-                dif3.setLayoutX(300);
-                dif3.setLayoutY(555);
-                dif3.setMinSize(30,30);
                 
+                dif1.setOnAction(new EventHandler<ActionEvent>()
+                        {
+                            @Override
+                            public void handle(ActionEvent event) 
+                            {
+                                difficultyMulti=1;
+                                try 
+                                {
+                                    FileInputStream d0 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD0 = new Image(d0);
+                                    ImageView dif0Img = new ImageView(imgD0);
+                                    dif0Img.setLayoutX(300);
+                                    dif0Img.setLayoutY(415);
+                                    root.getChildren().add(dif0Img);
+                                    dif0Img.toFront();
+                                    dif0.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d1 = new FileInputStream("src/tronv2/img/dif_select.png");
+                                    Image imgD1 = new Image(d1);
+                                    ImageView dif1Img = new ImageView(imgD1);
+                                    dif1Img.setLayoutX(300);
+                                    dif1Img.setLayoutY(460);
+                                    root.getChildren().add(dif1Img);
+                                    dif1Img.toFront();
+                                    dif1.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d2 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD2 = new Image(d2);
+                                    ImageView dif2Img = new ImageView(imgD2);
+                                    dif2Img.setLayoutX(300);
+                                    dif2Img.setLayoutY(510);
+                                    root.getChildren().add(dif2Img);
+                                    dif2Img.toFront();
+                                    dif2.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d3 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD3 = new Image(d3);
+                                    ImageView dif3Img = new ImageView(imgD3);
+                                    dif3Img.setLayoutX(300);
+                                    dif3Img.setLayoutY(555);
+                                    root.getChildren().add(dif3Img);
+                                    dif3Img.toFront();
+                                    dif3.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }                       
+                        });
+                dif2.setOnAction(new EventHandler<ActionEvent>()
+                        {
+                            @Override
+                            public void handle(ActionEvent event) 
+                            {
+                                difficultyMulti=0.5;
+                                try 
+                                {
+                                    FileInputStream d0 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD0 = new Image(d0);
+                                    ImageView dif0Img = new ImageView(imgD0);
+                                    dif0Img.setLayoutX(300);
+                                    dif0Img.setLayoutY(415);
+                                    root.getChildren().add(dif0Img);
+                                    dif0Img.toFront();
+                                    dif0.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d1 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD1 = new Image(d1);
+                                    ImageView dif1Img = new ImageView(imgD1);
+                                    dif1Img.setLayoutX(300);
+                                    dif1Img.setLayoutY(460);
+                                    root.getChildren().add(dif1Img);
+                                    dif1Img.toFront();
+                                    dif1.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d2 = new FileInputStream("src/tronv2/img/dif_select.png");
+                                    Image imgD2 = new Image(d2);
+                                    ImageView dif2Img = new ImageView(imgD2);
+                                    dif2Img.setLayoutX(300);
+                                    dif2Img.setLayoutY(510);
+                                    root.getChildren().add(dif2Img);
+                                    dif2Img.toFront();
+                                    dif2.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d3 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD3 = new Image(d3);
+                                    ImageView dif3Img = new ImageView(imgD3);
+                                    dif3Img.setLayoutX(300);
+                                    dif3Img.setLayoutY(555);
+                                    root.getChildren().add(dif3Img);
+                                    dif3Img.toFront();
+                                    dif3.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }                       
+                        });
+                dif3.setOnAction(new EventHandler<ActionEvent>()
+                        {
+                            @Override
+                            public void handle(ActionEvent event) 
+                            {
+                                difficultyMulti=0.25;
+                                try 
+                                {
+                                    FileInputStream d0 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD0 = new Image(d0);
+                                    ImageView dif0Img = new ImageView(imgD0);
+                                    dif0Img.setLayoutX(300);
+                                    dif0Img.setLayoutY(415);
+                                    root.getChildren().add(dif0Img);
+                                    dif0Img.toFront();
+                                    dif0.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d1 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD1 = new Image(d1);
+                                    ImageView dif1Img = new ImageView(imgD1);
+                                    dif1Img.setLayoutX(300);
+                                    dif1Img.setLayoutY(460);
+                                    root.getChildren().add(dif1Img);
+                                    dif1Img.toFront();
+                                    dif1.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d2 = new FileInputStream("src/tronv2/img/dif.png");
+                                    Image imgD2 = new Image(d2);
+                                    ImageView dif2Img = new ImageView(imgD2);
+                                    dif2Img.setLayoutX(300);
+                                    dif2Img.setLayoutY(510);
+                                    root.getChildren().add(dif2Img);
+                                    dif2Img.toFront();
+                                    dif2.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                try 
+                                {
+                                    FileInputStream d3 = new FileInputStream("src/tronv2/img/dif_select.png");
+                                    Image imgD3 = new Image(d3);
+                                    ImageView dif3Img = new ImageView(imgD3);
+                                    dif3Img.setLayoutX(300);
+                                    dif3Img.setLayoutY(555);
+                                    root.getChildren().add(dif3Img);
+                                    dif3Img.toFront();
+                                    dif3.toFront();
+                                } 
+                                catch (FileNotFoundException ex) 
+                                {
+                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }                       
+                        });
                 
                 
                 root.getChildren().add(btnBlue1);
@@ -1023,45 +1355,6 @@ public class TronV2 extends Application
                     
                 
                 
-                    Button btnMenu = new Button();
-                    btnMenu.setText("Quit");
-
-                    btnMenu.toFront();
-          
-                
-                    btnMenu.setOnAction(new EventHandler<ActionEvent>() 
-                    {
-                        @Override
-                        public void handle(ActionEvent event) 
-                        {
-                            
-                            primaryStage.setScene(menu);
-                            primaryStage.show();
-                            itsTimer.cancel();
-                            player2Tab.clear();
-                            player1Tab.clear();
-                                
-                            moto1.translateXProperty().set(0);
-                            moto1.translateYProperty().set(0);
-                            moto2.translateXProperty().set(0);
-                            moto2.translateYProperty().set(0);
-                            moto1.rotateProperty().setValue(0);
-                            moto2.rotateProperty().setValue(180);
-                            if(musicOn)
-                            {
-                                musicGame.stopMusic();
-                                try 
-                                {
-                                    musicGame = new MusicPlayer("src/tronv2/musics/daft-punk-the-game-has-changed-tron-legacy.wav");
-                                } 
-                                catch (IOException ex) 
-                                {
-                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            musicGame.playMusic();
-                            }
-                        }
-                    });
                     TimerTask gameLoop = new TimerTask() 
                     {
                         @Override
@@ -1073,33 +1366,33 @@ public class TronV2 extends Application
                                 player2.draw();
                             
                             
-                                Line player1Line = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
+                                Line blueLine = new Line(player1.getPosX(), player1.getPosY(), player1.getPosX(), player1.getPosY()); 
                                 if(colorChosen){
-                                   player1Line.setStroke(colorP1); 
+                                   blueLine.setStroke(colorP1); 
                                 }
                                 else{
                                     
                                 }
-                                player1Line.setStrokeWidth(5);
+                                blueLine.setStrokeWidth(5);
 
-                                Wall player1Wall = new Wall (player1Line);
-                                root.getChildren().add(player1Line);
-                                player1Wall.setPosX((int) player1.getPosX());
-                                player1Wall.setPosY((int) player1.getPosY());
+                                Wall blueWall = new Wall (blueLine);
+                                root.getChildren().add(blueLine);
+                                blueWall.setPosX((int) player1.getPosX());
+                                blueWall.setPosY((int) player1.getPosY());
                             
-                                Line player2Line = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
+                                Line redLine = new Line(player2.getPosX(), player2.getPosY(), player2.getPosX(), player2.getPosY()); 
                                 if(colorChosen){
-                                   player2Line.setStroke(colorP2); 
+                                   redLine.setStroke(colorP2); 
                                 }
                                 else{
                                     
                                 }
-                                player2Line.setStrokeWidth(5);
+                                redLine.setStrokeWidth(5);
 
-                                Wall player2Wall = new Wall (player2Line);
-                                root.getChildren().add(player2Line);
-                                player2Wall.setPosX((int) player2.getPosX());
-                                player2Wall.setPosY((int) player2.getPosY());
+                                Wall redWall = new Wall (redLine);
+                                root.getChildren().add(redLine);
+                                redWall.setPosX((int) player2.getPosX());
+                                redWall.setPosY((int) player2.getPosY());
                             
                             
                                 moto1.setX(player1.getPosX()-24);
@@ -1108,16 +1401,17 @@ public class TronV2 extends Application
                                 moto2.setY(player2.getPosY()-18);
                             
                             
-                                player1Tab.add(player1Wall);
-                                player2Tab.add(player2Wall);
+                                P1Tab.add(blueWall);
+                                P2Tab.add(redWall);
                             
-                                if(collision.collisions(player1, player2, player2Wall, player1Wall, player1Tab, player2Tab))
+                                if(collision.collisions(player1, player2, redWall,blueWall,P1Tab,P2Tab))
                                 {
-                                    itsTimer.cancel();
-                                    player1Tab.clear();
-                                    player2Tab.clear();
                                     moto2.toBack();
                                     moto1.toBack();
+                                    itsTimer.cancel();
+                                    P1Tab.clear();
+                                    P2Tab.clear();
+
 
                                     moto1.translateXProperty().set(0);
                                     moto1.translateYProperty().set(0);
@@ -1125,21 +1419,113 @@ public class TronV2 extends Application
                                     moto2.translateYProperty().set(0);
                                     moto1.rotateProperty().setValue(0);
                                     moto2.rotateProperty().setValue(180);
-                                    /*
-                                    if(collision.headOnCollision(player1Wall, player2Wall))
+                                    AnchorPane endAPane = new AnchorPane();
+                                    endAPane.setLayoutX(93);
+                                    endAPane.setLayoutY(187);
+                                    root.getChildren().add(endAPane);
+                                    FileInputStream endP;
+                                    try 
                                     {
-                                        System.out.println("Egalité");
-                                    }
-                                    else if(collision.collisionEdge(player2) || collision.player1Collision(player2Tab, player1Tab, player1Wall))
+                                        endP = new FileInputStream("src/tronv2/img/end_screen.png");
+                                        Image imgEndP = new Image(endP);
+                                        ImageView endAnchor = new ImageView(imgEndP);
+                                        endAPane.getChildren().add(endAnchor);
+                                    } 
+                                    catch (FileNotFoundException ex) 
                                     {
-                                        System.out.println("Le joueur 1 à gagné");
+                                        Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
                                     }
-                                    else if(collision.collisionEdge(player1) || collision.player2Collision(player2Tab, player1Tab, player2Wall))
+                                    
+                                    Label VictoryLabel = new Label("Egalité");
+                                    if(colorVictory != WHITE)
                                     {
-                                        System.out.println("Le joueur 2 à gagné");
-                                    }
-                                    */
-
+                                        if(colorVictory == colorP1)
+                                        {
+                                            VictoryLabel= new Label("Victoire pour le joueur 1");
+                                        }
+                                        if(colorVictory == colorP2)
+                                        {
+                                            VictoryLabel= new Label("Victoire pour le joueur 2");
+                                        }
+                                        
+                                    }    
+                                    VictoryLabel.setTextFill(colorVictory);
+                                    colorVictory=WHITE;
+                                    VictoryLabel.setLayoutX(282);
+                                    VictoryLabel.setLayoutY(100);
+                                    VictoryLabel.setAlignment(Pos.CENTER);
+                                    AnchorPane.setLeftAnchor(VictoryLabel, 0.0);
+                                    AnchorPane.setRightAnchor(VictoryLabel, 0.0);
+                                    /*Label VictoryComment = new Label("Les deux joueurs ont touchés un mur en même temps.");
+                                    VictoryComment.setTextFill(WHITE);
+                                    VictoryComment.setLayoutX(282);
+                                    VictoryComment.setLayoutY(130);
+                                    VictoryComment.setAlignment(Pos.CENTER);
+                                    AnchorPane.setLeftAnchor(VictoryComment, 0.0);
+                                    AnchorPane.setRightAnchor(VictoryComment, 0.0);*/
+                                    endAPane.getChildren().add(VictoryLabel);
+                                    /*endAPane.getChildren().add(VictoryComment);*/
+                                    
+                                    
+                                    Button btnRestart = new Button();
+                                    btnRestart.setLayoutX(70);
+                                    btnRestart.setLayoutY(220);
+                                    btnRestart.setMinSize(125, 90);
+                                    btnRestart.setStyle("-fx-background-color: transparent;");
+                                    Button btnQuitVictory = new Button();
+                                    btnQuitVictory.setLayoutX(370);
+                                    btnQuitVictory.setLayoutY(220);
+                                    btnQuitVictory.setMinSize(125, 90);
+                                    btnQuitVictory.setStyle("-fx-background-color: transparent;");
+                                    endAPane.getChildren().add(btnQuitVictory);
+                                    endAPane.getChildren().add(btnRestart);
+                                    
+                                    btnQuitVictory.setOnAction(new EventHandler<ActionEvent>() 
+                                    {
+                                        @Override
+                                        public void handle(ActionEvent event) 
+                                        {
+                                            primaryStage.setScene(menu);
+                                            primaryStage.show();
+                                            itsTimer.cancel();
+                                            P2Tab.clear();
+                                            P1Tab.clear();
+                                
+                                            moto1.translateXProperty().set(0);
+                                            moto1.translateYProperty().set(0);
+                                            moto2.translateXProperty().set(0);
+                                            moto2.translateYProperty().set(0);
+                                            moto1.rotateProperty().setValue(0);
+                                            moto2.rotateProperty().setValue(180);
+                                            if(musicOn)
+                                            {
+                                                musicGame.stopMusic();
+                                                try 
+                                                {
+                                                    musicGame = new MusicPlayer("src/tronv2/musics/daft-punk-the-game-has-changed-tron-legacy.wav");
+                                                } 
+                                                catch (IOException ex) 
+                                                {
+                                                    Logger.getLogger(TronV2.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
+                                                musicGame.playMusic();
+                                            }
+                                        }
+                                    });
+                                    
+                                    btnRestart.setOnAction(new EventHandler<ActionEvent>() 
+                                    {
+                                        @Override
+                                        public void handle(ActionEvent event) 
+                                        {
+                                            primaryStage.setScene(menu);
+                                            primaryStage.setScene(sceneOption);
+                                            itsTimer.cancel();
+                                            P2Tab.clear();
+                                            P1Tab.clear();
+                                            primaryStage.show();
+                                        }
+                                    });
                                 }
                                 moto2.toFront();
                                 moto1.toFront();
@@ -1149,7 +1535,7 @@ public class TronV2 extends Application
                     };
                 
                     itsTimer = new Timer();
-                    itsTimer.schedule(gameLoop, 1000,4);
+                    itsTimer.schedule(gameLoop, 1000, (long) (4*difficultyMulti));
 
                     scene.setOnKeyPressed(key ->
                     {

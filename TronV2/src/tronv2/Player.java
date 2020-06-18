@@ -30,6 +30,9 @@ public class Player{
         this.posY = posY;
     }
 
+    public int getIdPlayer() {
+        return idPlayer;
+    }
     
     public boolean getMoveRight() {
         return moveRight;
