@@ -74,7 +74,6 @@ public class Collision {
             if(wall1.getWallLine().intersects(p2tab.get(TheI).getWallLine().getBoundsInLocal()) )
             {
                 collision = true;
-                TronV2.colorVictory=TronV2.colorP2;
             }
         } 
         for(int TheI = p1tab.size()-1;TheI > 0 && collision == false;TheI--)
@@ -114,7 +113,6 @@ public class Collision {
                 if(wall2.getWallLine().intersects(p2tab.get(TheI-55).getWallLine().getBoundsInLocal()) )
                 {
                     collision = true;
-                    TronV2.colorVictory=TronV2.colorP1;
                 }
             }
         } 
@@ -143,24 +141,28 @@ public class Collision {
         {
             ifOneIsTrue = true;
             System.out.println("Joueur Rouge à gagné");
+            TronV2.colorVictory=TronV2.colorP2;
         }
         
         else if(collisionEdge(player2))
         {
             ifOneIsTrue = true;
             System.out.println("Joueur Bleu à gagné");
+            TronV2.colorVictory=TronV2.colorP1;
         }
         
         else if(p1Collision(p2tab,p1tab, p1Wall))
         {
             ifOneIsTrue = true;
             System.out.println("joueur rouge à gagné");
+            TronV2.colorVictory=TronV2.colorP2;
         }
       
         else if(p2Collision(p2tab,p1tab, p2Wall))
         {
             ifOneIsTrue = true;
             System.out.println("joueur bleu à gagné");
+            TronV2.colorVictory=TronV2.colorP1;
         }
         
         return ifOneIsTrue;
